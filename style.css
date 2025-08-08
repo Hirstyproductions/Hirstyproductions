@@ -109,7 +109,23 @@ h2 {
   align-items: flex-start;
   flex-wrap: wrap;
 }
+.video-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
 
+.video-row iframe {
+  width: 340px;
+  height: 200px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: #fff;
+  border: none;
+}
 .my-videos .video-grid iframe {
   width: 340px;
   height: 200px;
