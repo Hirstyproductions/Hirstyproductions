@@ -2,7 +2,6 @@ body {
   margin: 0;
   font-family: 'Montserrat', Arial, sans-serif;
   color: #222;
-  /* Gradient starts lower down (from 300px down) */
   background: linear-gradient(180deg, #fff 0px, #fff 300px, #3cb371 60%, #fff 100%);
   min-height: 100vh;
 }
@@ -197,4 +196,53 @@ footer {
   background: transparent;
   color: #222;
   margin-top: 2rem;
+}
+
+/* Social Bottom Bar Styles */
+.bottom-bar {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 2.5rem 0 2rem 0;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  margin-top: 0;
+}
+
+.bottom-bar-content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: 2rem;
+}
+
+.bottom-bar-title {
+  display: block;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.bottom-bar-icons a {
+  display: inline-block;
+  margin-right: 1rem;
+  vertical-align: middle;
+}
+
+.bottom-bar-icons img {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: transparent;
+  transition: transform 0.2s;
+  /* Optional: Add a subtle shadow for pop */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.bottom-bar-icons a:last-child {
+  margin-right: 0;
+}
+
+.bottom-bar-icons a:hover img {
+  transform: scale(1.13);
 }
