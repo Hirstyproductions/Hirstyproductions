@@ -2,7 +2,8 @@ body {
   margin: 0;
   font-family: 'Montserrat', Arial, sans-serif;
   color: #222;
-  background: linear-gradient(135deg, #eef2f3 0%, #c0c0df 100%);
+  /* White -> Green -> White horizontal gradient */
+  background: linear-gradient(90deg, #fff 0%, #3cb371 50%, #fff 100%);
   min-height: 100vh;
 }
 
@@ -19,14 +20,14 @@ header .tagline {
   margin-top: 0.5rem;
 }
 
-/* Remove the white box around each section */
+/* Remove any white box around sections */
 section {
   margin: 2rem auto;
   max-width: 900px;
   padding: 0 1rem;
-  background: none;
-  border-radius: 0;
-  box-shadow: none;
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 h2 {
