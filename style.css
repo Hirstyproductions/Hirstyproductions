@@ -190,7 +190,7 @@ h2 {
   align-self: flex-start;
 }
 
-/* Social Bottom Bar Styles */
+/* Social Bottom Bar Styles - move content to bottom left corner */
 .bottom-bar {
   width: 100vw;
   background: #000;
@@ -199,15 +199,16 @@ h2 {
   box-sizing: border-box;
   margin-top: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end; /* Move content to bottom */
+  justify-content: flex-start; /* Move content to left */
+  position: relative;
+  min-height: 180px;
 }
 
 .bottom-bar-content {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
   padding-left: 4vw;
+  padding-bottom: 1.5rem;
+  text-align: left;
 }
 
 .bottom-bar-title {
@@ -219,6 +220,10 @@ h2 {
   color: #fff;
 }
 
+.bottom-bar-icons {
+  margin-top: 0.7rem;
+}
+
 .bottom-bar-icons a {
   display: inline-block;
   margin-right: 1.3rem;
@@ -226,12 +231,13 @@ h2 {
 }
 
 .bottom-bar-icons svg {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: transparent;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #fff;
   transition: transform 0.2s;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 4px;
 }
 
 .bottom-bar-icons a:last-child {
