@@ -13,6 +13,37 @@ body {
   min-height: 100vh;
 }
 
+@media (max-width: 600px) {
+  body {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  .services,
+  .my-videos,
+  .worked-with,
+  .contact-us,
+  section {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .columns {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  button,
+  a {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+}
 /* Top bar */
 .top-bar {
   display: flex;
