@@ -208,17 +208,17 @@ h2 {
 }
 
 .bottom-bar-content {
-  padding-left: 4vw;
-  padding-bottom: 1.5rem;
+  padding-left: 2vw;
+  padding-bottom: 1.2rem;
   text-align: left;
 }
 
 .bottom-bar-title {
   display: block;
   font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: #fff;
 }
 
@@ -233,13 +233,13 @@ h2 {
 }
 
 .bottom-bar-icons svg {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   background: #fff;
   transition: transform 0.2s;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  padding: 4px;
+  padding: 2px;
 }
 
 .bottom-bar-icons a:last-child {
