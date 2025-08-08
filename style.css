@@ -8,16 +8,17 @@ body {
 
 /* Top black bar */
 .top-bar {
-  width: 100%;
+  width: 100vw;
   background: #000;
   color: #fff;
   padding: 1.2rem 0 1.2rem 0;
-  font-size: 2rem; /* smaller */
+  font-size: 2rem;
   letter-spacing: 1px;
   font-family: 'Montserrat', Arial, sans-serif;
   font-weight: 600;
   text-align: left;
   padding-left: 4vw;
+  box-sizing: border-box;
 }
 
 /* Welcome Banner styling */
@@ -189,53 +190,47 @@ h2 {
   align-self: flex-start;
 }
 
-footer {
-  text-align: center;
-  padding: 2rem 1rem 1rem 1rem;
-  font-size: 1rem;
-  background: transparent;
-  color: #222;
-  margin-top: 2rem;
-}
-
 /* Social Bottom Bar Styles */
 .bottom-bar {
-  width: 100%;
+  width: 100vw;
   background: #000;
   color: #fff;
-  padding: 2.5rem 0 2rem 0;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+  padding: 3.5rem 0 2.5rem 0;
+  box-sizing: border-box;
   margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bottom-bar-content {
-  max-width: 960px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
-  padding-left: 2rem;
+  padding-left: 4vw;
 }
 
 .bottom-bar-title {
   display: block;
   font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 2.1rem;
+  font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
 }
 
 .bottom-bar-icons a {
   display: inline-block;
-  margin-right: 1rem;
+  margin-right: 1.3rem;
   vertical-align: middle;
 }
 
-.bottom-bar-icons img {
-  width: 48px;
-  height: 48px;
+.bottom-bar-icons svg {
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   background: transparent;
   transition: transform 0.2s;
-  /* Optional: Add a subtle shadow for pop */
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 
@@ -243,6 +238,11 @@ footer {
   margin-right: 0;
 }
 
-.bottom-bar-icons a:hover img {
+.bottom-bar-icons a:hover svg {
   transform: scale(1.13);
+}
+
+/* Remove default footer rights bar */
+footer {
+  display: none !important;
 }
