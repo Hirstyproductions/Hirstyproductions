@@ -19,11 +19,12 @@ header .tagline {
   margin-top: 0.5rem;
 }
 
+/* Remove the white box around each section */
 section {
   margin: 2rem auto;
   max-width: 900px;
   padding: 0 1rem;
-  background: transparent;
+  background: none;
   border-radius: 0;
   box-shadow: none;
 }
