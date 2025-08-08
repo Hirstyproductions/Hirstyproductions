@@ -39,34 +39,7 @@ h2 {
   text-align: center;
 }
 
-.services .service-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 6rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.services .service-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 200px;
-}
-
-.services .service-item svg {
-  margin-bottom: 1.5rem;
-}
-
-.services .service-item p {
-  font-size: 1.4rem;
-  letter-spacing: 1px;
-  margin: 0;
-  text-align: center;
-}
-
+/* Services icons horizontally */
 .services .service-list {
   display: flex;
   flex-direction: row;
@@ -85,42 +58,40 @@ h2 {
   min-width: 150px;
 }
 
+.services .service-item svg {
+  margin-bottom: 1.5rem;
+}
+
+.services .service-item p {
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  margin: 0;
+  text-align: center;
+}
+
+/* Worked With logos - evenly spaced, bigger, white background */
 .clients .client-logos {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
-  justify-content: flex-start;
+  gap: 3rem;
+  justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .clients .client-logos img {
-  height: 50px;
-  background: #eee;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  /* Optionally add width for consistency */
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  height: 90px;
   width: auto;
-  max-width: 120px;
-}
-.clients .client-logos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 1rem;
+  object-fit: contain;
+  display: block;
 }
 
-.clients .client-logos img {
-  height: 50px;
-  margin-right: 1rem;
-  background: #eee;
-  padding: 5px;
-  border-radius: 5px;
-}
-
+/* Contact form styling */
 .contact form {
   display: flex;
   flex-direction: column;
