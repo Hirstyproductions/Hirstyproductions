@@ -1,3 +1,36 @@
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  background: #000;
+  color: #fff;
+  padding: 1.2rem 4vw 1.2rem 4vw;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.top-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.top-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.top-menu a:hover {
+  color: #3cb371;
+  text-decoration: underline;
+}
 body {
   margin: 0;
   font-family: 'Montserrat', Arial, sans-serif;
