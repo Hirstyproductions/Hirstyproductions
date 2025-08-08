@@ -39,7 +39,6 @@ h2 {
   text-align: center;
 }
 
-/* Services icons horizontally */
 .services .service-list {
   display: flex;
   flex-direction: row;
@@ -69,7 +68,7 @@ h2 {
   text-align: center;
 }
 
-/* Worked With logos - evenly spaced, bigger, white background */
+/* --- FIXED LOGO BLOCK --- */
 .clients .client-logos {
   display: flex;
   flex-direction: row;
@@ -85,13 +84,14 @@ h2 {
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  height: 90px;
-  width: auto;
+  height: 120px;
+  width: 120px;
   object-fit: contain;
   display: block;
+  box-sizing: border-box;
 }
+/* --- END FIXED LOGO BLOCK --- */
 
-/* Contact form styling */
 .contact form {
   display: flex;
   flex-direction: column;
