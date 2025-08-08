@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #f6f6f6;
+  color: #222;
+}
+
+header.welcome-banner {
+  background: #161616;
+  color: #fff;
+  text-align: center;
+  padding: 3rem 1rem 2rem 1rem;
+}
+
+header .tagline {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+}
+
+section {
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.showreel .video-wrapper {
+  text-align: center;
+}
+
+.services ul {
+  list-style: disc inside;
+  padding-left: 1rem;
+}
+
+.clients .client-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.clients .client-logos img {
+  height: 50px;
+  margin-right: 1rem;
+  background: #eee;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 400px;
+}
+
+.contact input, .contact textarea {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.contact button {
+  background: #161616;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.contact button:hover {
+  background: #222;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem 1rem 1rem;
+  font-size: 1rem;
+  background: #161616;
+  color: #fff;
+  margin-top: 2rem;
+}
