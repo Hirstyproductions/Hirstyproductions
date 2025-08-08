@@ -1,4 +1,11 @@
 body {
+  <div class="top-bar">
+  <a href="index.html" class="site-title">HIRSTY PRODUCTIONS</a>
+  <nav class="top-menu">
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+  </nav>
+</div>
   margin: 0;
   font-family: 'Montserrat', Arial, sans-serif;
   color: #222;
