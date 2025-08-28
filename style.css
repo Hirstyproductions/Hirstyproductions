@@ -74,8 +74,9 @@ header .tagline,
 }
 
 /* Section and headings */
-section {
-  margin: 2rem auto;
+section,
+.portfolio-section {
+  margin: 3.5rem auto;
   max-width: 900px;
   padding: 0 1rem;
   background: none !important;
@@ -128,9 +129,10 @@ h2 {
   text-align: center;
 }
 
-/* My Videos */
+/* My Videos and Portfolio Videos */
 .my-videos .video-grid,
-.video-row {
+.video-row,
+.portfolio-section .video-row {
   display: flex;
   flex-direction: row;
   gap: 2rem;
@@ -141,13 +143,24 @@ h2 {
 }
 
 .video-row iframe,
-.my-videos .video-grid iframe {
+.my-videos .video-grid iframe,
+.portfolio-section .video-row iframe {
   width: 340px;
   height: 200px;
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   background: #fff;
   border: none;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+}
+
+/* Portrait video fix for Blackfriars FC */
+.portfolio-section .video-row iframe[style*="aspect-ratio: 9/16"] {
+  width: 200px !important;
+  height: 355px !important;
+  aspect-ratio: 9/16 !important;
 }
 
 /* Worked With logos */
@@ -314,16 +327,6 @@ footer {
   display: none !important;
 }
 
-/* Section spacing */
-.services,
-.my-videos,
-.worked-with,
-.contact-us,
-section {
-  margin-top: 3.5rem;
-  margin-bottom: 3.5rem;
-}
-
 /* Responsive Styles for Mobile */
 @media (max-width: 600px) {
   body {
@@ -331,11 +334,12 @@ section {
     padding: 0.5rem;
   }
 
+  section,
+  .portfolio-section,
   .services,
   .my-videos,
   .worked-with,
-  .contact-us,
-  section {
+  .contact-us {
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
   }
@@ -359,10 +363,28 @@ section {
   .services .service-list,
   .clients .client-logos,
   .video-row,
-  .my-videos .video-grid {
+  .my-videos .video-grid,
+  .portfolio-section .video-row {
     flex-direction: column;
     gap: 1.5rem;
     align-items: center;
+  }
+
+  .video-row iframe,
+  .my-videos .video-grid iframe,
+  .portfolio-section .video-row iframe {
+    width: 100vw;
+    max-width: 98vw;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+
+  /* Portrait video fix for Blackfriars FC on mobile */
+  .portfolio-section .video-row iframe[style*="aspect-ratio: 9/16"] {
+    width: 80vw !important;
+    height: auto !important;
+    aspect-ratio: 9/16 !important;
+    max-width: 260px;
   }
 
   .contact-form {
@@ -387,4 +409,3 @@ section {
     font-size: 1.3rem;
   }
 }
-
