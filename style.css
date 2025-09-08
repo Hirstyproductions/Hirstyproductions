@@ -441,36 +441,32 @@ footer {
     margin: 0 auto;
   }
 }
-/* Photo Carousel Styles (updated for better fit) */
-.photo-carousel {
+/* --- Multi-Image Carousel Styles --- */
+.multi-carousel {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
   margin-top: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.carousel-images {
-  width: 100%;
-  max-width: 350px;   /* limits max width of carousel */
-  height: 220px;      /* limits height of images */
+.carousel-track {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  transition: transform 0.4s;
+  width: 100%;
   overflow: hidden;
 }
 
-.carousel-images img {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;    /* ensures image doesn't overflow container */
-  max-height: 100%;   /* ensures image doesn't overflow container */
+.carousel-track img {
+  flex: 0 0 25%; /* 4 images per view */
+  max-width: 100%;
+  height: 180px;
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  display: none;      /* Only one is visible at a time */
-  transition: opacity 0.4s;
+  margin: 0 6px;
 }
 
 .carousel-arrow {
@@ -483,6 +479,7 @@ footer {
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.09);
   transition: background 0.2s, color 0.2s;
+  z-index: 2;
 }
 
 .carousel-arrow:hover {
@@ -490,17 +487,10 @@ footer {
   color: #0a7cf5;
 }
 
-/* Responsive styles for mobile */
 @media (max-width: 600px) {
-  .carousel-images {
-    max-width: 98vw;
-    height: 160px;
-  }
-  .photo-carousel {
-    gap: 0.5rem;
-  }
-  .carousel-arrow {
-    font-size: 1.4rem;
-    padding: 0.2em 0.3em;
+  .carousel-track img {
+    flex: 0 0 50%; /* 2 images per view on mobile */
+    height: 110px;
+    margin: 0 3px;
   }
 }
