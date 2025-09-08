@@ -441,14 +441,14 @@ footer {
     margin: 0 auto;
   }
 }
-/* --- Multi-Image Carousel (Rectangular 340x200px) --- */
+/* --- Multi-Image Carousel (Rectangular 340x200px, correct sizing) --- */
 .multi-carousel {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
-  max-width: 1500px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
@@ -458,17 +458,16 @@ footer {
 .carousel-track {
   display: flex;
   transition: transform 0.4s;
-  width: 1400px; /* Enough for 4 images @ 340px each */
   height: 200px;
   overflow: hidden;
 }
 
 .carousel-track img {
-  flex: 0 0 340px;      /* Each image is 340px wide */
+  flex: 0 0 340px;
   width: 340px;
-  height: 200px;        /* Match video iframe height */
+  height: 200px;
   object-fit: cover;
-  border-radius: 16px;  /* Match video corners */
+  border-radius: 16px;
   margin: 0 8px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.12);
   background: #fff;
@@ -494,14 +493,12 @@ footer {
   color: #0a7cf5;
 }
 
-/* Responsive styles for mobile/tablet */
 @media (max-width: 900px) {
   .multi-carousel {
     height: 120px;
     max-width: 100vw;
   }
   .carousel-track {
-    width: 100vw;
     height: 110px;
   }
   .carousel-track img {
