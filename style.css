@@ -441,7 +441,7 @@ footer {
     margin: 0 auto;
   }
 }
-/* Photo Carousel Styles */
+/* Photo Carousel Styles (updated for better fit) */
 .photo-carousel {
   display: flex;
   align-items: center;
@@ -451,8 +451,9 @@ footer {
 }
 
 .carousel-images {
-  width: 320px;
-  height: 220px;
+  width: 100%;
+  max-width: 350px;   /* limits max width of carousel */
+  height: 220px;      /* limits height of images */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -463,10 +464,12 @@ footer {
 .carousel-images img {
   width: 100%;
   height: 100%;
+  max-width: 100%;    /* ensures image doesn't overflow container */
+  max-height: 100%;   /* ensures image doesn't overflow container */
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  display: none; /* Only one is visible at a time */
+  display: none;      /* Only one is visible at a time */
   transition: opacity 0.4s;
 }
 
@@ -490,7 +493,7 @@ footer {
 /* Responsive styles for mobile */
 @media (max-width: 600px) {
   .carousel-images {
-    width: 98vw;
+    max-width: 98vw;
     height: 160px;
   }
   .photo-carousel {
