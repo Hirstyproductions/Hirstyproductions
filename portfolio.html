@@ -5,6 +5,61 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Portfolio - Hirsty Productions</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Photo Carousel Styles for multiple images per row */
+    .multi-carousel {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-track img {
+      flex: 0 0 25%; /* 4 images per view */
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 0 6px;
+    }
+
+    .carousel-arrow {
+      background: #fff;
+      color: #222;
+      border: 1px solid #ccc;
+      font-size: 2rem;
+      padding: 0.3em 0.6em;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      transition: background 0.2s, color 0.2s;
+      z-index: 2;
+    }
+
+    .carousel-arrow:hover {
+      background: #f0f0f0;
+      color: #0a7cf5;
+    }
+
+    @media (max-width: 600px) {
+      .carousel-track img {
+        flex: 0 0 50%; /* 2 images per view on mobile */
+        height: 110px;
+        margin: 0 3px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Top Bar -->
@@ -55,12 +110,12 @@
     </div>
   </section>
   
-  <!-- FOOTBALL PHOTO LIBRARY SECTION -->
+  <!-- FOOTBALL PHOTO LIBRARY SECTION WITH MULTI-IMAGE CAROUSEL -->
   <section class="portfolio-section">
     <h2>Fives Photos</h2>
-    <div class="photo-carousel">
+    <div class="multi-carousel">
       <button class="carousel-arrow left">&#8592;</button>
-      <div class="carousel-images">
+      <div class="carousel-track">
         <img src="photoswebp/1.webp" alt="Football Photo 1" loading="lazy">
         <img src="photoswebp/2.webp" alt="Football Photo 2" loading="lazy">
         <img src="photoswebp/3.webp" alt="Football Photo 3" loading="lazy">
@@ -84,44 +139,71 @@
     </div>
   </section>
   <!-- END OF PHOTO LIBRARY SECTION -->
-  
+
   <!-- Social Bottom Bar -->
   <div class="bottom-bar">
     <div class="bottom-bar-content">
       <span class="bottom-bar-title">Hirsty Productions</span>
       <div class="bottom-bar-icons">
-        <!-- Social icons here -->
-        <!-- ... your SVG icon code ... -->
+        <a href="https://www.instagram.com/hirstyproductions/" target="_blank" rel="noopener" aria-label="Instagram">
+          <!-- White Instagram SVG -->
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="7" fill="#fff"/><path d="M16.5 7.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12 8.75A3.25 3.25 0 1 0 12 15.25a3.25 3.25 0 0 0 0-6.5Zm0 1.5a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5ZM7.25 4A3.25 3.25 0 0 0 4 7.25v9.5A3.25 3.25 0 0 0 7.25 20h9.5A3.25 3.25 0 0 0 20 16.75v-9.5A3.25 3.25 0 0 0 16.75 4h-9.5Zm0 1.5h9.5c.97 0 1.75.78 1.75 1.75v9.5c0 .97-.78 1.75-1.75 1.75h-9.5A1.75 1.75 0 0 1 5.5 16.75v-9.5c0-.97.78-1.75 1.75-1.75Z" fill="#000"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/matthew-hirst-950298206/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <!-- White LinkedIn SVG -->
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="7" fill="#fff"/><path d="M16.5 7.5A1.5 1.5 0 0 0 15 6h-6a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 9 18h6a1.5 1.5 0 0 0 1.5-1.5v-9ZM8.56 17.25h-2.01V10h2.01v7.25ZM7.56 8.75a1.01 1.01 0 1 1 0-2.02 1.01 1.01 0 0 1 0 2.02Zm9.19 8.5h-2.01v-3.62c0-.86-.32-1.45-1.12-1.45-.61 0-.97.41-1.13.81-.06.14-.08.34-.08.54v3.72h-2.01s.03-6.04 0-7.25h2.01v1.03c.27-.42.76-1.03 1.85-1.03 1.35 0 2.36.88 2.36 2.77v4.48Z" fill="#000"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@hirstyproductions" target="_blank" rel="noopener" aria-label="YouTube">
+          <!-- White YouTube SVG -->
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="7" fill="#fff"/><path d="M19.5 8.26A2.5 2.5 0 0 0 17.1 6.5C15.3 6 12 6 12 6s-3.3 0-5.1.5A2.5 2.5 0 0 0 4.5 8.26C4 10.07 4 12 4 12s0 1.93.5 3.74a2.5 2.5 0 0 0 2.4 1.76C8.7 18 12 18 12 18s3.3 0 5.1-.5c1.1-.22 2-1.03 2.4-1.76.5-1.81.5-3.74.5-3.74s0-1.93-.5-3.74ZM10 15.5V8.5l6 3.5-6 3.5Z" fill="#000"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@hirstyproductions?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok">
+          <!-- White TikTok SVG -->
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="7" fill="#fff"/><path d="M16.75 8.75a3.25 3.25 0 0 1-3.25-3.25V4h-2.5v10.5a1.25 1.25 0 1 1-1.25-1.25V11a3.25 3.25 0 1 0 3.25 3.25V9.5a5.25 5.25 0 0 0 5.25 5.25h.5V12c-1.93 0-3.5-1.57-3.5-3.5V8.75Z" fill="#000"/></svg>
+        </a>
       </div>
     </div>
   </div>
-  
-  <!-- Put your JavaScript code here, INSIDE a <script> block, right before </body> -->
   <script>
-    const carousel = document.querySelector('.carousel-images');
-    const images = document.querySelectorAll('.carousel-images img');
+    // Multi-image carousel script
+    const track = document.querySelector('.carousel-track');
+    const images = track.querySelectorAll('img');
     const leftArrow = document.querySelector('.carousel-arrow.left');
     const rightArrow = document.querySelector('.carousel-arrow.right');
+    let imagesPerView = window.innerWidth < 600 ? 2 : 4;
     let currentIndex = 0;
 
-    function showImage(index) {
-      images.forEach((img, i) => {
-        img.style.display = (i === index) ? 'block' : 'none';
-      });
+    function updateImagesPerView() {
+      imagesPerView = window.innerWidth < 600 ? 2 : 4;
+    }
+
+    function updateCarousel() {
+      updateImagesPerView();
+      track.style.transform = `translateX(-${currentIndex * (100 / imagesPerView)}%)`;
     }
 
     leftArrow.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage(currentIndex);
+      updateImagesPerView();
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
     });
 
     rightArrow.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage(currentIndex);
+      updateImagesPerView();
+      if (currentIndex < images.length - imagesPerView) {
+        currentIndex++;
+        updateCarousel();
+      }
     });
 
-    // Initialize
-    showImage(currentIndex);
+    window.addEventListener('resize', () => {
+      updateCarousel();
+    });
+
+    // Initial setup
+    updateCarousel();
   </script>
 </body>
 </html>
