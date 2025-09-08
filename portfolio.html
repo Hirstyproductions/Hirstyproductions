@@ -6,32 +6,38 @@
   <title>Portfolio - Hirsty Productions</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Photo Carousel Styles for multiple images per row */
+    /* --- Multi-Image Carousel (Rectangular 340x200px) --- */
     .multi-carousel {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-top: 2rem;
-      max-width: 900px;
+      max-width: 1500px;
       margin-left: auto;
       margin-right: auto;
+      overflow: hidden;
+      height: 220px;
     }
 
     .carousel-track {
       display: flex;
       transition: transform 0.4s;
-      width: 100%;
+      height: 200px;
       overflow: hidden;
     }
 
     .carousel-track img {
-      flex: 0 0 25%; /* 4 images per view */
-      max-width: 100%;
-      height: 180px;
+      flex: 0 0 340px;
+      width: 340px;
+      height: 200px;
       object-fit: cover;
-      border-radius: 10px;
-      margin: 0 6px;
+      border-radius: 16px;
+      margin: 0 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      background: #fff;
+      border: none;
+      transition: transform 0.2s;
     }
 
     .carousel-arrow {
@@ -52,11 +58,20 @@
       color: #0a7cf5;
     }
 
-    @media (max-width: 600px) {
-      .carousel-track img {
-        flex: 0 0 50%; /* 2 images per view on mobile */
+    @media (max-width: 900px) {
+      .multi-carousel {
+        height: 120px;
+        max-width: 100vw;
+      }
+      .carousel-track {
         height: 110px;
-        margin: 0 3px;
+      }
+      .carousel-track img {
+        flex: 0 0 48vw;
+        width: 48vw;
+        height: 110px;
+        margin: 0 2px;
+        border-radius: 12px;
       }
     }
   </style>
@@ -165,25 +180,25 @@
     </div>
   </div>
   <script>
-    // Multi-image carousel script
+    // Multi-image carousel script FIXED
     const track = document.querySelector('.carousel-track');
     const images = track.querySelectorAll('img');
     const leftArrow = document.querySelector('.carousel-arrow.left');
     const rightArrow = document.querySelector('.carousel-arrow.right');
-    let imagesPerView = window.innerWidth < 600 ? 2 : 4;
-    let currentIndex = 0;
 
-    function updateImagesPerView() {
-      imagesPerView = window.innerWidth < 600 ? 2 : 4;
+    function getImagesPerView() {
+      return window.innerWidth < 900 ? 2 : 4;
     }
 
+    let currentIndex = 0;
+
     function updateCarousel() {
-      updateImagesPerView();
-      track.style.transform = `translateX(-${currentIndex * (100 / imagesPerView)}%)`;
+      const imagesPerView = getImagesPerView();
+      const imageWidth = images[0].offsetWidth + (window.innerWidth < 900 ? 4 : 16); // margin
+      track.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
     }
 
     leftArrow.addEventListener('click', () => {
-      updateImagesPerView();
       if (currentIndex > 0) {
         currentIndex--;
         updateCarousel();
@@ -191,19 +206,15 @@
     });
 
     rightArrow.addEventListener('click', () => {
-      updateImagesPerView();
+      const imagesPerView = getImagesPerView();
       if (currentIndex < images.length - imagesPerView) {
         currentIndex++;
         updateCarousel();
       }
     });
 
-    window.addEventListener('resize', () => {
-      updateCarousel();
-    });
-
-    // Initial setup
-    updateCarousel();
+    window.addEventListener('resize', updateCarousel);
+    window.addEventListener('load', updateCarousel);
   </script>
 </body>
 </html>
