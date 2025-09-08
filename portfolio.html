@@ -108,70 +108,6 @@
       height: 355px !important;
       aspect-ratio: 9/16 !important;
     }
-    /* --- Multi-Image Carousel (Vertical Portrait 200x355px) --- */
-    .multi-carousel {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2rem;
-      max-width: 1000px;
-      margin-left: auto;
-      margin-right: auto;
-      overflow: hidden;
-      height: 370px;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.4s;
-      height: 355px;
-      overflow: hidden;
-    }
-    .carousel-track img {
-      flex: 0 0 200px;
-      width: 200px;
-      height: 355px;
-      object-fit: cover;
-      aspect-ratio: 9/16;
-      border-radius: 16px;
-      margin: 0 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-      background: #fff;
-      border: none;
-      transition: transform 0.2s;
-    }
-    .carousel-arrow {
-      background: #fff;
-      color: #222;
-      border: 1px solid #ccc;
-      font-size: 2rem;
-      padding: 0.3em 0.6em;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
-      transition: background 0.2s, color 0.2s;
-      z-index: 2;
-    }
-    .carousel-arrow:hover {
-      background: #f0f0f0;
-      color: #0a7cf5;
-    }
-    @media (max-width: 900px) {
-      .multi-carousel {
-        height: 190px;
-        max-width: 100vw;
-      }
-      .carousel-track {
-        height: 170px;
-      }
-      .carousel-track img {
-        flex: 0 0 40vw;
-        width: 40vw;
-        height: 170px;
-        margin: 0 2px;
-        border-radius: 12px;
-      }
-    }
     /* Social Bottom Bar Styles */
     .bottom-bar {
       width: 100vw;
@@ -264,6 +200,30 @@
         font-size: 1.3rem;
       }
     }
+    /* Fives Photos Link */
+    .fives-photos-link-container {
+      text-align: center;
+      margin: 2.5rem 0 0 0;
+    }
+    .fives-photos-link {
+      display: inline-block;
+      padding: 0.8em 2em;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: #3cb371;
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 1px;
+    }
+    .fives-photos-link:hover,
+    .fives-photos-link:focus {
+      background: #29985c;
+      color: #fff;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -290,6 +250,9 @@
     <div class="video-row">
       <iframe src="https://www.youtube.com/embed/QchzTBHIGfg" title="Super 6 Winner Takes All!" frameborder="0" allowfullscreen></iframe>
     </div>
+    <div class="fives-photos-link-container">
+      <a class="fives-photos-link" href="photos.html">Fives Photos</a>
+    </div>
   </section>
   <section class="portfolio-section">
     <h2>Blackfriars FC</h2>
@@ -310,35 +273,6 @@
       ></iframe>
     </div>
   </section>
-  <!-- FOOTBALL PHOTO LIBRARY SECTION WITH MULTI-IMAGE PORTRAIT CAROUSEL -->
-  <section class="portfolio-section">
-    <h2>Fives Photos</h2>
-    <div class="multi-carousel">
-      <button class="carousel-arrow left">&#8592;</button>
-      <div class="carousel-track">
-        <img src="photoswebp/1.webp" alt="Football Photo 1" loading="lazy">
-        <img src="photoswebp/2.webp" alt="Football Photo 2" loading="lazy">
-        <img src="photoswebp/3.webp" alt="Football Photo 3" loading="lazy">
-        <img src="photoswebp/4.webp" alt="Football Photo 4" loading="lazy">
-        <img src="photoswebp/5.webp" alt="Football Photo 5" loading="lazy">
-        <img src="photoswebp/6.webp" alt="Football Photo 6" loading="lazy">
-        <img src="photoswebp/7.webp" alt="Football Photo 7" loading="lazy">
-        <img src="photoswebp/8.webp" alt="Football Photo 8" loading="lazy">
-        <img src="photoswebp/9.webp" alt="Football Photo 9" loading="lazy">
-        <img src="photoswebp/10.webp" alt="Football Photo 10" loading="lazy">
-        <img src="photoswebp/11.webp" alt="Football Photo 11" loading="lazy">
-        <img src="photoswebp/12.webp" alt="Football Photo 12" loading="lazy">
-        <img src="photoswebp/13.webp" alt="Football Photo 13" loading="lazy">
-        <img src="photoswebp/14.webp" alt="Football Photo 14" loading="lazy">
-        <img src="photoswebp/15.webp" alt="Football Photo 15" loading="lazy">
-        <img src="photoswebp/16.webp" alt="Football Photo 16" loading="lazy">
-        <img src="photoswebp/17.webp" alt="Football Photo 17" loading="lazy">
-        <img src="photoswebp/18.webp" alt="Football Photo 18" loading="lazy">
-      </div>
-      <button class="carousel-arrow right">&#8594;</button>
-    </div>
-  </section>
-  <!-- END OF PHOTO LIBRARY SECTION -->
   <!-- Social Bottom Bar -->
   <div class="bottom-bar">
     <div class="bottom-bar-content">
@@ -359,43 +293,5 @@
       </div>
     </div>
   </div>
-  <!-- Multi-image vertical carousel JS -->
-  <script>
-    const track = document.querySelector('.carousel-track');
-    const images = track.querySelectorAll('img');
-    const leftArrow = document.querySelector('.carousel-arrow.left');
-    const rightArrow = document.querySelector('.carousel-arrow.right');
-    function getImagesPerView() {
-      return window.innerWidth < 900 ? 2 : 4;
-    }
-    let currentIndex = 0;
-    function updateCarousel() {
-      const imagesPerView = getImagesPerView();
-      // Prevent scrolling past the last image
-      if (currentIndex > images.length - imagesPerView) {
-        currentIndex = images.length - imagesPerView;
-      }
-      if (currentIndex < 0) {
-        currentIndex = 0;
-      }
-      const imageWidth = images[0].offsetWidth + (window.innerWidth < 900 ? 4 : 16);
-      track.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
-    }
-    leftArrow.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateCarousel();
-      }
-    });
-    rightArrow.addEventListener('click', () => {
-      const imagesPerView = getImagesPerView();
-      if (currentIndex < images.length - imagesPerView) {
-        currentIndex++;
-        updateCarousel();
-      }
-    });
-    window.addEventListener('resize', updateCarousel);
-    window.addEventListener('load', updateCarousel);
-  </script>
 </body>
 </html>
