@@ -28,13 +28,15 @@
     <section class="showreel">
       <h2>Showreel</h2>
       <div class="video-wrapper">
-        <!-- Responsive iframe: CSS controls size -->
+        <!-- Single iframe in DOM. JS will move it into a floating container on load and animate back on scroll. -->
         <iframe
           class="showreel-iframe"
-          src="https://www.youtube.com/embed/iGTNLc4Vkuo?start=1"
+          src="https://www.youtube.com/embed/iGTNLc4Vkuo?start=1&autoplay=1&mute=1&playsinline=1&rel=0"
           title="Hirsty Productions Showreel"
           frameborder="0"
-          allowfullscreen></iframe>
+          allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+          allowfullscreen
+          loading="eager"></iframe>
       </div>
     </section>
 
@@ -132,5 +134,136 @@
       </div>
     </div>
   </div>
+
+  <script>
+  // FLIP animation: move iframe into a floating full-screen wrapper on load,
+  // then when the user scrolls or clicks, animate back into the inline container.
+  (function () {
+    const iframe = document.querySelector('.showreel-iframe');
+    const wrapper = document.querySelector('.showreel .video-wrapper');
+    if (!iframe || !wrapper) return;
+
+    // helper to create floating container and move iframe into it
+    function createFloating() {
+      const floating = document.createElement('div');
+      floating.className = 'fp-floating';
+      // will be positioned fixed to cover the viewport initially
+      Object.assign(floating.style, {
+        position: 'fixed',
+        left: '0',
+        top: '0',
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 9999,
+        pointerEvents: 'auto',
+        background: '#000'
+      });
+      // move iframe into floating
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+      iframe.style.maxWidth = '100%';
+      iframe.style.maxHeight = '100%';
+      floating.appendChild(iframe);
+      document.body.appendChild(floating);
+      // small initial paint
+      return floating;
+    }
+
+    // compute and animate FLIP to the inline wrapper position
+    function animateToInline(floating) {
+      // final rect = wrapper's inner target space (video-wrapper)
+      const targetRect = wrapper.getBoundingClientRect();
+      const floatingRect = floating.getBoundingClientRect();
+
+      // compute scale and translate from floating -> target
+      const scaleX = targetRect.width / floatingRect.width;
+      const scaleY = targetRect.height / floatingRect.height;
+      const translateX = targetRect.left - floatingRect.left;
+      const translateY = targetRect.top - floatingRect.top;
+
+      // prepare transition
+      floating.style.transformOrigin = 'top left';
+      floating.style.transition = 'transform 700ms cubic-bezier(.2,.9,.3,1), border-radius 700ms ease, width 700ms ease, height 700ms ease';
+      // add rounded corners on animate to match inline look
+      floating.style.borderRadius = '12px';
+      // trigger the transform
+      requestAnimationFrame(() => {
+        floating.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+      });
+
+      // on transition end, move iframe back to wrapper and clean up floating element
+      function onTransitionEnd(e) {
+        if (e.propertyName !== 'transform') return;
+        floating.removeEventListener('transitionend', onTransitionEnd);
+        // reset transform so moving the iframe back does not get affected
+        floating.style.transition = '';
+        floating.style.transform = '';
+        floating.style.borderRadius = '';
+        // move iframe back into the original wrapper
+        iframe.style.width = '';
+        iframe.style.height = '';
+        iframe.style.maxWidth = '';
+        iframe.style.maxHeight = '';
+        wrapper.appendChild(iframe);
+        // remove floating element
+        if (floating.parentNode) floating.parentNode.removeChild(floating);
+      }
+      floating.addEventListener('transitionend', onTransitionEnd);
+    }
+
+    // create floating and keep it until user scrolls (or clicks)
+    const floating = createFloating();
+
+    // UX: reveal hint (optional) - small down arrow - not required; keep simple
+    // Trigger shrink on: first scroll, wheel, or touchstart, or click anywhere
+    let triggered = false;
+    function triggerShrink() {
+      if (triggered) return;
+      triggered = true;
+      // animate to inline
+      animateToInline(floating);
+      // remove listeners
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouch);
+      window.removeEventListener('scroll', onScroll);
+      document.removeEventListener('click', onClick);
+    }
+
+    function onWheel() { triggerShrink(); }
+    function onTouch() { triggerShrink(); }
+    function onScroll() {
+      // only shrink if user actually scrolled down a bit
+      if (window.scrollY > 30) triggerShrink();
+    }
+    function onClick() { triggerShrink(); }
+
+    // attach listeners
+    window.addEventListener('wheel', onWheel, {passive: true});
+    window.addEventListener('touchstart', onTouch, {passive: true});
+    window.addEventListener('scroll', onScroll, {passive: true});
+    document.addEventListener('click', onClick);
+
+    // Also auto-shrink after a timeout (optional, in case user doesn't interact)
+    const AUTO_SHRINK_MS = 4000;
+    setTimeout(() => triggerShrink(), AUTO_SHRINK_MS);
+
+    // accessibility: if user prefers reduced motion, skip animation and just move iframe back
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      // immediate move back
+      wrapper.appendChild(iframe);
+      if (floating.parentNode) floating.parentNode.removeChild(floating);
+      // remove listeners
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouch);
+      window.removeEventListener('scroll', onScroll);
+      document.removeEventListener('click', onClick);
+    }
+  })();
+  </script>
 </body>
 </html>
