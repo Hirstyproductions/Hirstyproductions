@@ -1,25 +1,23 @@
-body {
-  margin: 0;
-  font-family: 'Montserrat', Arial, sans-serif;
-  color: #222;
-  background: linear-gradient(180deg, #fff 0px, #fff 300px, #3cb371 60%, #fff 100%);
-  min-height: 100vh;
+/* Basic page layout and top bar */
+:root {
+  --accent: #3cb371;
+  --text: #111;
 }
 
-/* Top bar */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: #fff;
+}
+
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
-  background: #000;
+  background: #111;
   color: #fff;
-  padding: 1.2rem 4vw;
-  font-size: 2rem;
-  letter-spacing: 1px;
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-weight: 600;
-  box-sizing: border-box;
+  padding: 0.8rem 2rem;
 }
 
 .site-title {
@@ -43,14 +41,14 @@ body {
 }
 
 .top-menu a:hover {
-  color: #3cb371;
+  color: var(--accent);
   text-decoration: underline;
 }
 
 /* Welcome Banner styling */
 header.welcome-banner {
   background: transparent;
-  color: #111;
+  color: var(--text);
   text-align: center;
   padding: 5rem 1rem 4rem 1rem;
 }
@@ -92,9 +90,41 @@ h2 {
   text-align: center;
 }
 
-/* Showreel */
+/* ==== Showreel: full-width (bleed) video ==== */
+/* Make the video wrapper full viewport width while keeping the rest of the page centered */
+.showreel {
+  margin: 0;
+  padding: 0;
+}
+
+/* This centers a full-bleed element inside a centered layout */
 .showreel .video-wrapper {
-  text-align: center;
+  width: 100vw;
+  margin-left: calc(50% - 50vw); /* pull the element to the left edge of the viewport */
+  margin-right: calc(50% - 50vw);
+  background: #000;
+  display: block;
+}
+
+/* Responsive iframe: keep 16:9 aspect ratio, and limit height to avoid extremely tall video on mobile */
+.showreel .video-wrapper iframe,
+.showreel .video-wrapper .video-element {
+  width: 100%;
+  height: calc(100vw * 9 / 16); /* height = width * 9/16 */
+  max-height: 80vh;            /* never exceed 80% of viewport height */
+  aspect-ratio: 16 / 9;
+  border: none;
+  display: block;
+}
+
+/* Ensure the page content below the showreel keeps normal max-width */
+.showreel + section,
+.showreel + .services {
+  margin-top: 2rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
 }
 
 /* Services */
@@ -129,7 +159,7 @@ h2 {
   text-align: center;
 }
 
-/* My Videos and Portfolio Videos */
+/* Video grids used elsewhere */
 .my-videos .video-grid,
 .video-row,
 .portfolio-section .video-row {
@@ -156,357 +186,8 @@ h2 {
   aspect-ratio: 16/9;
 }
 
-/* Portrait video fix for Blackfriars FC */
-.portfolio-section .video-row iframe[style*="aspect-ratio: 9/16"] {
-  width: 200px !important;
-  height: 355px !important;
-  aspect-ratio: 9/16 !important;
-}
-
-/* Worked With logos */
-.clients .client-logos {
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  background: transparent;
-}
-
-.clients .client-logos a {
-  display: flex;
-  align-items: center;
-  transition: transform 0.2s;
-}
-
-.clients .client-logos a:hover {
-  transform: scale(1.07);
-}
-
-.clients .client-logos img {
-  height: 90px;
-  width: auto;
-  object-fit: contain;
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
-  display: block;
-  transition: box-shadow 0.2s;
-}
-
-/* Contact form styling - mobile-friendly */
-.contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.contact-form {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #e0f5df;
-  border-radius: 10px;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-.contact-form h2 {
-  text-align: center;
-}
-
-.contact-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.contact-form label {
-  align-self: flex-start;
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 14px;
-  border-radius: 5px;
-  border: 1px solid #bbb;
-  box-sizing: border-box;
-  font-size: 1rem;
-}
-
-.contact-form button {
-  width: 100%;
-  padding: 12px;
-  background: #222;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  margin-top: 0.5rem;
-  font-weight: bold;
-}
-
-.contact-form button:hover {
-  background: #444;
-}
-
-.contact-form p {
-  text-align: center;
-  margin-top: 1rem;
-}
-
-/* Social Bottom Bar Styles */
-.bottom-bar {
-  width: 100vw;
-  background: #000;
-  color: #fff;
-  padding: 3.5rem 0 2.5rem 0;
-  box-sizing: border-box;
-  margin-top: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  position: relative;
-  min-height: 180px;
-}
-
-.bottom-bar-content {
-  padding-left: 2vw;
-  padding-bottom: 1.2rem;
-  text-align: left;
-}
-
-.bottom-bar-title {
-  display: block;
-  font-family: 'Montserrat', Arial, sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.bottom-bar-icons {
-  margin-top: 0.7rem;
-}
-
-.bottom-bar-icons a {
-  display: inline-block;
-  margin-right: 1.3rem;
-  vertical-align: middle;
-}
-
-.bottom-bar-icons svg {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: #fff;
-  transition: transform 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-  padding: 2px;
-}
-
-.bottom-bar-icons a:last-child {
-  margin-right: 0;
-}
-
-.bottom-bar-icons a:hover svg {
-  transform: scale(1.13);
-}
-
-/* Remove default footer rights bar */
-footer {
-  display: none !important;
-}
-
-/* Responsive Styles for Mobile */
+/* Small screens: reduce welcome-title size and ensure video height is sensible */
 @media (max-width: 600px) {
-  body {
-    font-size: 1rem;
-    padding: 0.5rem;
-  }
-
-  section,
-  .portfolio-section,
-  .services,
-  .my-videos,
-  .worked-with,
-  .contact-us {
-    margin-top: 1.2rem;
-    margin-bottom: 1.2rem;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .columns {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  button,
-  a {
-    padding: 1rem;
-    font-size: 1.1rem;
-  }
-
-  .services .service-list,
-  .clients .client-logos,
-  .video-row,
-  .my-videos .video-grid,
-  .portfolio-section .video-row {
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-  }
-
-  .video-row iframe,
-  .my-videos .video-grid iframe,
-  .portfolio-section .video-row iframe {
-    width: 100vw;
-    max-width: 98vw;
-    height: auto;
-    aspect-ratio: 16/9;
-  }
-
-  /* Portrait video fix for Blackfriars FC on mobile */
-  .portfolio-section .video-row iframe[style*="aspect-ratio: 9/16"] {
-    width: 80vw !important;
-    height: auto !important;
-    aspect-ratio: 9/16 !important;
-    max-width: 260px;
-  }
-
-  .contact-form {
-    padding: 12px;
-    margin: 10px;
-    max-width: 95vw;
-  }
-  .contact-form input,
-  .contact-form textarea {
-    font-size: 1rem;
-    padding: 10px;
-  }
-  .contact-form button {
-    font-size: 1rem;
-    padding: 10px;
-  }
-  .bottom-bar {
-    padding: 2rem 0 1.5rem 0;
-    min-height: 100px;
-  }
-  .bottom-bar-title {
-    font-size: 1.3rem;
-  }
-}
-.photo-library {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.2rem;
-  justify-items: center;
-  margin-top: 2rem;
-}
-
-.photo-library img {
-  width: 100%;
-  max-width: 220px;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  object-fit: cover;
-  transition: transform 0.2s;
-}
-
-.photo-library img:hover {
-  transform: scale(1.05);
-}
-
-/* Mobile styles */
-@media (max-width: 600px) {
-  .photo-library {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.7rem;
-  }
-  .photo-library img {
-    max-width: 98vw;
-    margin: 0 auto;
-  }
-}
-
-.multi-carousel {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-  height: 370px;
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.4s;
-  height: 355px;
-  overflow: hidden;
-}
-
-.carousel-track img {
-  flex: 0 0 200px;
-  width: 200px;
-  height: 355px;
-  object-fit: cover;
-  aspect-ratio: 9/16;
-  border-radius: 16px;
-  margin: 0 8px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
-  background: #fff;
-  border: none;
-  transition: transform 0.2s;
-}
-
-.carousel-arrow {
-  background: #fff;
-  color: #222;
-  border: 1px solid #ccc;
-  font-size: 2rem;
-  padding: 0.3em 0.6em;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.09);
-  transition: background 0.2s, color 0.2s;
-  z-index: 2;
-}
-
-.carousel-arrow:hover {
-  background: #f0f0f0;
-  color: #0a7cf5;
-}
-
-@media (max-width: 900px) {
-  .multi-carousel {
-    height: 190px;
-    max-width: 100vw;
-  }
-  .carousel-track {
-    height: 170px;
-  }
-  .carousel-track img {
-    flex: 0 0 40vw;
-    width: 40vw;
-    height: 170px;
-    margin: 0 2px;
-    border-radius: 12px;
-  }
+  header .welcome-title { font-size: 7vw; }
+  .showreel .video-wrapper iframe { height: calc(100vw * 9 / 16); max-height: 60vh; }
 }
