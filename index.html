@@ -28,7 +28,6 @@
     <section class="showreel">
       <h2>Showreel</h2>
       <div class="video-wrapper">
-        <!-- Single iframe in DOM. JS will move it into a floating container on load and animate back on scroll. -->
         <iframe
           class="showreel-iframe"
           src="https://www.youtube.com/embed/iGTNLc4Vkuo?start=1&autoplay=1&mute=1&playsinline=1&rel=0"
@@ -136,18 +135,15 @@
   </div>
 
   <script>
-  // FLIP animation: move iframe into a floating full-screen wrapper on load,
-  // then when the user scrolls or clicks, animate back into the inline container.
   (function () {
     const iframe = document.querySelector('.showreel-iframe');
     const wrapper = document.querySelector('.showreel .video-wrapper');
     if (!iframe || !wrapper) return;
 
-    // helper to create floating container and move iframe into it
+    // Create floating container and move iframe into it (full-viewport)
     function createFloating() {
       const floating = document.createElement('div');
       floating.className = 'fp-floating';
-      // will be positioned fixed to cover the viewport initially
       Object.assign(floating.style, {
         position: 'fixed',
         left: '0',
@@ -159,109 +155,146 @@
         justifyContent: 'center',
         zIndex: 9999,
         pointerEvents: 'auto',
-        background: '#000'
+        background: 'rgba(0,0,0,1)',
+        transition: 'transform 700ms cubic-bezier(.2,.9,.3,1), background 700ms ease, border-radius 700ms ease'
       });
-      // move iframe into floating
+      // make iframe fill the floating container
       iframe.style.width = '100%';
       iframe.style.height = '100%';
       iframe.style.border = 'none';
       iframe.style.maxWidth = '100%';
       iframe.style.maxHeight = '100%';
+      iframe.style.borderRadius = '0';
+      // move iframe
       floating.appendChild(iframe);
       document.body.appendChild(floating);
-      // small initial paint
       return floating;
     }
 
-    // compute and animate FLIP to the inline wrapper position
+    // Animate floating container from fullscreen into the wrapper target,
+    // fading the background at the same time so it morphs + fades
     function animateToInline(floating) {
-      // final rect = wrapper's inner target space (video-wrapper)
       const targetRect = wrapper.getBoundingClientRect();
       const floatingRect = floating.getBoundingClientRect();
 
-      // compute scale and translate from floating -> target
       const scaleX = targetRect.width / floatingRect.width;
       const scaleY = targetRect.height / floatingRect.height;
       const translateX = targetRect.left - floatingRect.left;
       const translateY = targetRect.top - floatingRect.top;
 
-      // prepare transition
-      floating.style.transformOrigin = 'top left';
-      floating.style.transition = 'transform 700ms cubic-bezier(.2,.9,.3,1), border-radius 700ms ease, width 700ms ease, height 700ms ease';
-      // add rounded corners on animate to match inline look
-      floating.style.borderRadius = '12px';
-      // trigger the transform
+      // ensure transitions are present
+      floating.style.transition = 'transform 700ms cubic-bezier(.2,.9,.3,1), background 700ms ease, border-radius 700ms ease';
+      // animate to target (morph) and fade background
       requestAnimationFrame(() => {
+        floating.style.transformOrigin = 'top left';
         floating.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+        floating.style.background = 'rgba(0,0,0,0)'; // fade background
+        // round the corners visually as it morphs
+        floating.style.borderRadius = '12px';
+        // slightly round iframe
+        iframe.style.borderRadius = '12px';
       });
 
-      // on transition end, move iframe back to wrapper and clean up floating element
-      function onTransitionEnd(e) {
+      // After the morph completes, re-parent floating into wrapper in a way that avoids visual jump.
+      floating.addEventListener('transitionend', function onEnd(e) {
         if (e.propertyName !== 'transform') return;
-        floating.removeEventListener('transitionend', onTransitionEnd);
-        // reset transform so moving the iframe back does not get affected
-        floating.style.transition = '';
-        floating.style.transform = '';
-        floating.style.borderRadius = '';
-        // move iframe back into the original wrapper
-        iframe.style.width = '';
-        iframe.style.height = '';
-        iframe.style.maxWidth = '';
-        iframe.style.maxHeight = '';
-        wrapper.appendChild(iframe);
-        // remove floating element
-        if (floating.parentNode) floating.parentNode.removeChild(floating);
-      }
-      floating.addEventListener('transitionend', onTransitionEnd);
+        floating.removeEventListener('transitionend', onEnd);
+
+        // compute rects to keep the element visually in the same place while reparenting
+        const floatingRectAfter = floating.getBoundingClientRect();
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const dx = floatingRectAfter.left - wrapperRect.left;
+        const dy = floatingRectAfter.top - wrapperRect.top;
+        const w = floatingRectAfter.width;
+        const h = floatingRectAfter.height;
+
+        // stop transitions for immediate placement
+        floating.style.transition = 'none';
+        floating.style.transform = 'none';
+        // set absolute coords relative to wrapper so when appended it stays put visually
+        floating.style.position = 'absolute';
+        floating.style.left = dx + 'px';
+        floating.style.top = dy + 'px';
+        floating.style.width = w + 'px';
+        floating.style.height = h + 'px';
+        floating.style.zIndex = 10;
+        // append to wrapper
+        wrapper.style.position = wrapper.style.position || 'relative';
+        wrapper.appendChild(floating);
+
+        // now animate the floating to fill the wrapper (small final smoothing)
+        requestAnimationFrame(() => {
+          floating.style.transition = 'all 300ms ease';
+          floating.style.left = '0';
+          floating.style.top = '0';
+          floating.style.width = '100%';
+          floating.style.height = '100%';
+          floating.style.borderRadius = '12px';
+          floating.style.background = 'transparent';
+        });
+
+        // after that final small transition, tidy up (remove inlined sizes so CSS controls layout)
+        floating.addEventListener('transitionend', function cleanup(ev) {
+          if (ev.propertyName !== 'width' && ev.propertyName !== 'height') return;
+          floating.removeEventListener('transitionend', cleanup);
+          floating.style.transition = '';
+          floating.style.position = 'relative';
+          floating.style.left = '';
+          floating.style.top = '';
+          floating.style.width = '';
+          floating.style.height = '';
+          floating.style.zIndex = '';
+          floating.style.borderRadius = '';
+          // iframe is already inside floating, which sits inside wrapper; everything visually matches the inline layout
+        });
+      });
     }
 
-    // create floating and keep it until user scrolls (or clicks)
     const floating = createFloating();
 
-    // UX: reveal hint (optional) - small down arrow - not required; keep simple
-    // Trigger shrink on: first scroll, wheel, or touchstart, or click anywhere
+    // shrink trigger (first meaningful user interaction or timeout)
     let triggered = false;
     function triggerShrink() {
       if (triggered) return;
       triggered = true;
-      // animate to inline
       animateToInline(floating);
-      // remove listeners
-      window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('touchstart', onTouch);
-      window.removeEventListener('scroll', onScroll);
-      document.removeEventListener('click', onClick);
+      removeListeners();
     }
 
     function onWheel() { triggerShrink(); }
     function onTouch() { triggerShrink(); }
     function onScroll() {
-      // only shrink if user actually scrolled down a bit
       if (window.scrollY > 30) triggerShrink();
     }
     function onClick() { triggerShrink(); }
 
-    // attach listeners
+    function removeListeners() {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouch);
+      window.removeEventListener('scroll', onScroll);
+      document.removeEventListener('click', onClick);
+    }
+
     window.addEventListener('wheel', onWheel, {passive: true});
     window.addEventListener('touchstart', onTouch, {passive: true});
     window.addEventListener('scroll', onScroll, {passive: true});
     document.addEventListener('click', onClick);
 
-    // Also auto-shrink after a timeout (optional, in case user doesn't interact)
+    // Auto-shrink after timeout if user doesn't interact
     const AUTO_SHRINK_MS = 4000;
-    setTimeout(() => triggerShrink(), AUTO_SHRINK_MS);
+    const autoTimer = setTimeout(() => triggerShrink(), AUTO_SHRINK_MS);
 
-    // accessibility: if user prefers reduced motion, skip animation and just move iframe back
+    // respects reduced-motion: immediately move iframe back into wrapper without animation
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
-      // immediate move back
+      clearTimeout(autoTimer);
+      // quick immediate move: remove floating and append iframe back to wrapper
+      wrapper.style.position = wrapper.style.position || 'relative';
       wrapper.appendChild(iframe);
-      if (floating.parentNode) floating.parentNode.removeChild(floating);
-      // remove listeners
-      window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('touchstart', onTouch);
-      window.removeEventListener('scroll', onScroll);
-      document.removeEventListener('click', onClick);
+      // remove any floating node (it won't exist if createFloating moved iframe already)
+      const maybeFloating = document.querySelector('.fp-floating');
+      if (maybeFloating && maybeFloating.parentNode) maybeFloating.parentNode.removeChild(maybeFloating);
+      removeListeners();
     }
   })();
   </script>
