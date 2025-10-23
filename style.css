@@ -92,9 +92,31 @@ h2 {
   text-align: center;
 }
 
-/* Showreel */
+/* Showreel - made larger while staying centered and responsive */
+.showreel {
+  /* Allow showreel to be wider than the default 900px and keep it centered */
+  max-width: 1200px; /* increase this if you want it even wider */
+  margin: 0 auto 2rem auto;
+  padding: 0 1rem;
+}
+
 .showreel .video-wrapper {
   text-align: center;
+}
+
+/* Responsive control for the showreel iframe */
+.showreel .video-wrapper .showreel-iframe {
+  width: 100%;
+  max-width: 1200px;      /* same as section max-width so it doesn't overflow */
+  aspect-ratio: 16 / 9;   /* keeps correct aspect ratio */
+  height: auto;
+  max-height: 80vh;       /* prevents it being taller than the screen */
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Services */
@@ -407,6 +429,18 @@ footer {
   }
   .bottom-bar-title {
     font-size: 1.3rem;
+  }
+
+  /* Make the larger showreel fit nicely on small screens */
+  .showreel {
+    max-width: 98vw;
+    padding: 0;
+  }
+  .showreel .video-wrapper .showreel-iframe {
+    max-width: 98vw;
+    height: auto;
+    max-height: 60vh;
+    border-radius: 8px;
   }
 }
 .photo-library {
