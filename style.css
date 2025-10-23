@@ -101,8 +101,9 @@ h2 {
 
 .showreel .video-wrapper {
   text-align: center;
-  /* The wrapper keeps space for the inline iframe so the FLIP animation has a target rect */
   display: block;
+  /* reserve space for the final inline iframe */
+  min-height: calc((1200px * 9) / 16); /* best-effort placeholder to reduce layout jump on very tall screens */
 }
 
 /* Inline iframe (final resting size) */
@@ -120,9 +121,9 @@ h2 {
   margin-right: auto;
 }
 
-/* If the floating container exists it is styled by JS with .fp-floating; we add a small rule fallback */
+/* Floating container used during animation */
 .fp-floating {
-  will-change: transform;
+  will-change: transform, background;
 }
 
 /* Services */
@@ -441,6 +442,7 @@ footer {
   .showreel {
     max-width: 98vw;
     padding: 0;
+    min-height: calc((98vw * 9) / 16);
   }
   .showreel .video-wrapper .showreel-iframe {
     max-width: 98vw;
@@ -466,7 +468,7 @@ photo-library img {
   transition: transform 0.2s;
 }
 
-.photo-library img:hover {
+photo-library img:hover {
   transform: scale(1.05);
 }
 
