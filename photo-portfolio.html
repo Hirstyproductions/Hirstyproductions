@@ -4,22 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photography Portfolio | Hirsty Productions</title>
-  <meta name="description" content="Professional football and sports photography portfolio by Hirsty Productions. Fives and 11-a-side match coverage.">
-  <meta name="keywords" content="sports photography, football photography, fives football, 11-a-side, match photography, Hirsty Productions">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Photography Portfolio | Hirsty Productions">
-  <meta property="og:description" content="Professional football and sports photography portfolio.">
-  <meta property="og:image" content="https://hirstyproductions.com/webphotos/Fives/Fives%20Photo%201.webp">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▶</text></svg>">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
+
     .photo-section {
       padding: 5rem 0;
     }
@@ -131,7 +121,9 @@
         -webkit-overflow-scrolling: touch;
       }
     }
-      
+  
+
+
     /* Lightbox Styles */
     .lightbox {
       display: none;
@@ -145,6 +137,9 @@
       justify-content: center;
       align-items: center;
       cursor: zoom-out;
+    }
+    .lightbox.active {
+      display: flex;
     }
     .lightbox img {
       max-width: 90%;
@@ -162,7 +157,7 @@
       z-index: 10000;
     }
 
-    /* 11-a-side horizontal photos */
+    /* 11-a-side horizontal photos - MUST override default styles */
     #11aside-track img {
       flex: 0 0 400px !important;
       width: 400px !important;
@@ -173,10 +168,12 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     #11aside-track img:hover {
       transform: scale(1.05);
       box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     }
+
     @media (max-width: 768px) {
       #11aside-track img {
         flex: 0 0 300px !important;
@@ -191,7 +188,9 @@
         height: 175px !important;
       }
     }
+  
 </style>
+
 <base target="_blank">
 </head>
 <body>
@@ -217,7 +216,7 @@
   <!-- ADDED HEADER (matches video portfolio) -->
   <header class="portfolio-header">
     <div class="container">
-      <h1 class="section-title" style="text-align: center;">Photography Portfolio</h1>
+      <h1 class="section-title">Photography Portfolio</h1>
       <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.1rem; text-align: center; margin-top: 1rem;">
         Professional photography work
       </p>
@@ -231,7 +230,7 @@
         <p class="photo-section-subtitle">Scroll through the action</p>
 
         <div class="carousel-wrapper">
-          <button class="carousel-btn carousel-btn-left" id="fives-left" aria-label="Previous Fives photo">
+          <button class="carousel-btn carousel-btn-left" id="fives-left" aria-label="Previous">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
@@ -239,28 +238,28 @@
 
           <div class="carousel-container">
             <div class="carousel-track" id="fives-track">
-              <img src="webphotos/Fives/Fives Photo 1.webp" alt="Fives Photo 1" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 2.webp" alt="Fives Photo 2" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 3.webp" alt="Fives Photo 3" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 4.webp" alt="Fives Photo 4" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 5.webp" alt="Fives Photo 5" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 6.webp" alt="Fives Photo 6" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 7.webp" alt="Fives Photo 7" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 8.webp" alt="Fives Photo 8" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 9.webp" alt="Fives Photo 9" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 10.webp" alt="Fives Photo 10" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 11.webp" alt="Fives Photo 11" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 12.webp" alt="Fives Photo 12" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 13.webp" alt="Fives Photo 13" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 14.webp" alt="Fives Photo 14" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 15.webp" alt="Fives Photo 15" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 16.webp" alt="Fives Photo 16" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 17.webp" alt="Fives Photo 17" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
-              <img src="webphotos/Fives/Fives Photo 18.webp" alt="Fives Photo 18" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;" width="280" height="500">
+              <img src="webphotos/Fives/Fives Photo 1.webp" alt="Fives football photo 1" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 2.webp" alt="Fives football photo 2" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 3.webp" alt="Fives football photo 3" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 4.webp" alt="Fives football photo 4" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 5.webp" alt="Fives football photo 5" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 6.webp" alt="Fives football photo 6" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 7.webp" alt="Fives football photo 7" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 8.webp" alt="Fives football photo 8" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 9.webp" alt="Fives football photo 9" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 10.webp" alt="Fives football photo 10" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 11.webp" alt="Fives football photo 11" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 12.webp" alt="Fives football photo 12" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 13.webp" alt="Fives football photo 13" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 14.webp" alt="Fives football photo 14" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 15.webp" alt="Fives football photo 15" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 16.webp" alt="Fives football photo 16" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 17.webp" alt="Fives football photo 17" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
+              <img src="webphotos/Fives/Fives Photo 18.webp" alt="Fives football photo 18" loading="lazy" onclick="openLightbox(this.src)" style="cursor: zoom-in;">
             </div>
           </div>
 
-          <button class="carousel-btn carousel-btn-right" id="fives-right" aria-label="Next Fives photo">
+          <button class="carousel-btn carousel-btn-right" id="fives-right" aria-label="Next">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
@@ -275,7 +274,7 @@
         <p class="photo-section-subtitle">Full match day coverage</p>
 
         <div class="carousel-wrapper">
-          <button class="carousel-btn carousel-btn-left" id="11aside-left" aria-label="Previous 11-a-side photo">
+          <button class="carousel-btn carousel-btn-left" id="11aside-left" aria-label="Previous">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
@@ -283,11 +282,57 @@
 
           <div class="carousel-container">
             <div class="carousel-track" id="11aside-track">
-              <!-- images unchanged -->
+              <img src="webphotos/11aside/11-a-side photo 1.webp" alt="11-a-side football photo 1" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 2.webp" alt="11-a-side football photo 2" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 3.webp" alt="11-a-side football photo 3" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 4.webp" alt="11-a-side football photo 4" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 5.webp" alt="11-a-side football photo 5" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 6.webp" alt="11-a-side football photo 6" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 7.webp" alt="11-a-side football photo 7" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 8.webp" alt="11-a-side football photo 8" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 9.webp" alt="11-a-side football photo 9" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 10.webp" alt="11-a-side football photo 10" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 11.webp" alt="11-a-side football photo 11" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 12.webp" alt="11-a-side football photo 12" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 13.webp" alt="11-a-side football photo 13" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 14.webp" alt="11-a-side football photo 14" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 15.webp" alt="11-a-side football photo 15" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 16.webp" alt="11-a-side football photo 16" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 17.webp" alt="11-a-side football photo 17" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 18.webp" alt="11-a-side football photo 18" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 19.webp" alt="11-a-side football photo 19" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 20.webp" alt="11-a-side football photo 20" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 21.webp" alt="11-a-side football photo 21" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 22.webp" alt="11-a-side football photo 22" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 23.webp" alt="11-a-side football photo 23" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 24.webp" alt="11-a-side football photo 24" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 25.webp" alt="11-a-side football photo 25" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 26.webp" alt="11-a-side football photo 26" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 27.webp" alt="11-a-side football photo 27" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 28.webp" alt="11-a-side football photo 28" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 29.webp" alt="11-a-side football photo 29" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 30.webp" alt="11-a-side football photo 30" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 31.webp" alt="11-a-side football photo 31" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 32.webp" alt="11-a-side football photo 32" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 33.webp" alt="11-a-side football photo 33" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 34.webp" alt="11-a-side football photo 34" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 35.webp" alt="11-a-side football photo 35" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 36.webp" alt="11-a-side football photo 36" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 37.webp" alt="11-a-side football photo 37" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 38.webp" alt="11-a-side football photo 38" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 39.webp" alt="11-a-side football photo 39" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 40.webp" alt="11-a-side football photo 40" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 41.webp" alt="11-a-side football photo 41" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 42.webp" alt="11-a-side football photo 42" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 43.webp" alt="11-a-side football photo 43" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 44.webp" alt="11-a-side football photo 44" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 45.webp" alt="11-a-side football photo 45" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 46.webp" alt="11-a-side football photo 46" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
+              <img src="webphotos/11aside/11-a-side photo 47.webp" alt="11-a-side football photo 47" loading="lazy" style="flex: 0 0 400px; width: 400px; height: 280px; object-fit: cover; cursor: zoom-in; border-radius: 12px;" onclick="openLightbox(this.src)">
             </div>
           </div>
 
-          <button class="carousel-btn carousel-btn-right" id="11aside-right" aria-label="Next 11-a-side photo">
+          <button class="carousel-btn carousel-btn-right" id="11aside-right" aria-label="Next">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
@@ -296,10 +341,10 @@
       </div>
     </section>
 
-    <section style="padding: 5rem 0; background: white; text-align: center;">
-      <div class="container">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 1.5rem;">Need Professional Photography?</h2>
-        <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">Let's capture your moments with stunning imagery.</p>
+    <section style="padding: 5rem 0; background: white;">
+      <div class="container" style="text-align: center;">
+        <h2 class="section-title" style="display: block; transform: none; left: auto; margin: 0 auto 1.5rem;">Need Professional Photography?</h2>
+        <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem; text-align: center;">Let's capture your moments with stunning imagery.</p>
         <a href="index.html#contact" class="btn-primary">Get in Touch</a>
       </div>
     </section>
@@ -344,77 +389,44 @@
   <script src="photo-carousel.js"></script>
   <script src="script.js"></script>
 
-
 <!-- Lightbox Modal -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <span class="lightbox-close">&times;</span>
   <img src="" alt="Expanded photo" id="lightbox-img">
-  <div id="lightbox-counter" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: white; font-size: 14px; background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 20px;"></div>
 </div>
 
 <script>
-  // Lightbox functionality with photo counter
-  let currentPhotoIndex = 0;
-  let allPhotos = [];
-
+  // Lightbox functionality
   function openLightbox(src) {
-    var lightbox = document.getElementById('lightbox');
-    var lightboxImg = document.getElementById('lightbox-img');
-    var counter = document.getElementById('lightbox-counter');
-
+    console.log('Opening lightbox:', src);
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
     if (lightbox && lightboxImg) {
-      if (allPhotos.length === 0) {
-        allPhotos = Array.from(document.querySelectorAll('.carousel-track img')).map(function(img) { return img.src; });
-      }
-
-      currentPhotoIndex = allPhotos.indexOf(src);
       lightboxImg.src = src;
       lightbox.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-
-      if (counter) {
-        counter.textContent = 'Photo ' + (currentPhotoIndex + 1) + ' of ' + allPhotos.length;
-      }
     }
   }
 
   function closeLightbox() {
-    var lightbox = document.getElementById('lightbox');
+    console.log('Closing lightbox');
+    const lightbox = document.getElementById('lightbox');
     if (lightbox) {
       lightbox.style.display = 'none';
       document.body.style.overflow = 'auto';
     }
   }
 
-  function nextPhoto() {
-    if (allPhotos.length === 0) return;
-    currentPhotoIndex = (currentPhotoIndex + 1) % allPhotos.length;
-    document.getElementById('lightbox-img').src = allPhotos[currentPhotoIndex];
-    document.getElementById('lightbox-counter').textContent = 'Photo ' + (currentPhotoIndex + 1) + ' of ' + allPhotos.length;
-  }
-
-  function prevPhoto() {
-    if (allPhotos.length === 0) return;
-    currentPhotoIndex = (currentPhotoIndex - 1 + allPhotos.length) % allPhotos.length;
-    document.getElementById('lightbox-img').src = allPhotos[currentPhotoIndex];
-    document.getElementById('lightbox-counter').textContent = 'Photo ' + (currentPhotoIndex + 1) + ' of ' + allPhotos.length;
-  }
-
-  // Keyboard navigation
-  document.addEventListener('keydown', function(e) {
-    var lightbox = document.getElementById('lightbox');
-    if (lightbox && lightbox.style.display === 'flex') {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') nextPhoto();
-      if (e.key === 'ArrowLeft') prevPhoto();
-    }
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
   });
 
-  // Prevent closing when clicking the image
-  document.addEventListener('DOMContentLoaded', function() {
-    var lightboxImg = document.getElementById('lightbox-img');
+  // Prevent closing when clicking the image itself
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightboxImg = document.getElementById('lightbox-img');
     if (lightboxImg) {
-      lightboxImg.addEventListener('click', function(e) {
+      lightboxImg.addEventListener('click', (e) => {
         e.stopPropagation();
       });
     }
