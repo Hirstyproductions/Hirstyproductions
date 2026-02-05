@@ -1,105 +1,112 @@
-// ===== PHOTO CAROUSEL =====
-document.addEventListener('DOMContentLoaded', () => {
-  const track = document.querySelector('.photo-carousel-track');
-  const leftBtn = document.querySelector('.carousel-btn-left');
-  const rightBtn = document.querySelector('.carousel-btn-right');
-  
-  if (!track || !leftBtn || !rightBtn) return;
-  
-  const images = track.querySelectorAll('img');
-  const imageWidth = 280; // Width of each image + gap
-  const gap = 24; // 1.5rem gap
-  const scrollAmount = imageWidth + gap;
-  
-  let currentPosition = 0;
-  const maxScroll = -(scrollAmount * (images.length - Math.floor(track.parentElement.offsetWidth / scrollAmount)));
-  
-  // Update button states
-  function updateButtons() {
-    leftBtn.disabled = currentPosition >= 0;
-    rightBtn.disabled = currentPosition <= maxScroll;
+// Photo Carousel Functionality
+console.log('Photo carousel script loaded');
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing carousels');
     
-    leftBtn.style.opacity = currentPosition >= 0 ? '0.5' : '1';
-    rightBtn.style.opacity = currentPosition <= maxScroll ? '0.5' : '1';
-  }
-  
-  // Scroll left
-  leftBtn.addEventListener('click', () => {
-    currentPosition = Math.min(currentPosition + scrollAmount, 0);
-    track.style.transform = `translateX(${currentPosition}px)`;
-    updateButtons();
-  });
-  
-  // Scroll right
-  rightBtn.addEventListener('click', () => {
-    currentPosition = Math.max(currentPosition - scrollAmount, maxScroll);
-    track.style.transform = `translateX(${currentPosition}px)`;
-    updateButtons();
-  });
-  
-  // Touch support for mobile
-  let startX = 0;
-  let currentX = 0;
-  let isDragging = false;
-  
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    isDragging = true;
-  });
-  
-  track.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    const newPosition = currentPosition + diff;
+    // Find all carousels
+    const carousels = document.querySelectorAll('.carousel-track');
+    console.log(`Found ${carousels.length} carousel(s)`);
     
-    // Don't go beyond bounds
-    if (newPosition <= 0 && newPosition >= maxScroll) {
-      track.style.transform = `translateX(${newPosition}px)`;
-    }
-  });
-  
-  track.addEventListener('touchend', (e) => {
-    if (!isDragging) return;
-    isDragging = false;
-    
-    const diff = currentX - startX;
-    
-    // Snap to nearest image
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        // Swiped right
-        currentPosition = Math.min(currentPosition + scrollAmount, 0);
-      } else {
-        // Swiped left
-        currentPosition = Math.max(currentPosition - scrollAmount, maxScroll);
-      }
-    }
-    
-    track.style.transform = `translateX(${currentPosition}px)`;
-    updateButtons();
-  });
-  
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      leftBtn.click();
-    } else if (e.key === 'ArrowRight') {
-      rightBtn.click();
-    }
-  });
-  
-  // Initial button state
-  updateButtons();
-  
-  // Update on window resize
-  let resizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      currentPosition = 0;
-      track.style.transform = 'translateX(0)';
-      updateButtons();
-    }, 250);
-  });
+    carousels.forEach((track, index) => {
+        const carouselId = track.getAttribute('data-carousel');
+        console.log(`Initializing carousel: ${carouselId}`);
+        
+        const slides = track.querySelectorAll('.carousel-slide');
+        const prevButton = document.querySelector(`.carousel-button.prev[data-carousel="${carouselId}"]`);
+        const nextButton = document.querySelector(`.carousel-button.next[data-carousel="${carouselId}"]`);
+        const currentSlideSpan = document.querySelector(`.current-slide[data-carousel="${carouselId}"]`);
+        
+        console.log(`Carousel ${carouselId}: ${slides.length} slides, prev button: ${!!prevButton}, next button: ${!!nextButton}`);
+        
+        let currentIndex = 0;
+        
+        function updateCarousel() {
+            const offset = -currentIndex * 100;
+            track.style.transform = `translateX(${offset}%)`;
+            
+            if (currentSlideSpan) {
+                currentSlideSpan.textContent = currentIndex + 1;
+            }
+            
+            // Update button states
+            if (prevButton) {
+                prevButton.disabled = currentIndex === 0;
+                prevButton.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            }
+            if (nextButton) {
+                nextButton.disabled = currentIndex === slides.length - 1;
+                nextButton.style.opacity = currentIndex === slides.length - 1 ? '0.5' : '1';
+            }
+            
+            console.log(`Carousel ${carouselId} updated to slide ${currentIndex + 1}/${slides.length}`);
+        }
+        
+        // Next button
+        if (nextButton) {
+            nextButton.addEventListener('click', function() {
+                console.log(`Next button clicked for ${carouselId}`);
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+        }
+        
+        // Previous button
+        if (prevButton) {
+            prevButton.addEventListener('click', function() {
+                console.log(`Prev button clicked for ${carouselId}`);
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            } else if (e.key === 'ArrowRight' && currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+        
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        track.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        track.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentIndex < slides.length - 1) {
+                    // Swipe left (next)
+                    currentIndex++;
+                    updateCarousel();
+                } else if (diff < 0 && currentIndex > 0) {
+                    // Swipe right (previous)
+                    currentIndex--;
+                    updateCarousel();
+                }
+            }
+        }
+        
+        // Initialize
+        updateCarousel();
+        console.log(`Carousel ${carouselId} initialized successfully`);
+    });
 });
