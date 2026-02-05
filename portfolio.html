@@ -4,215 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio | Hirsty Productions</title>
-  <meta name="description" content="Explore the video and photography portfolio of Hirsty Productions.">
+  <meta name="description" content="Explore video and photography work by Hirsty Productions.">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-  <style>
-    /* Portfolio Hub Styles */
-    .portfolio-hub {
-      min-height: 100vh;
-      padding: 8rem 2rem 4rem;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-    }
-
-    .portfolio-hub-content {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .portfolio-hub-title {
-      text-align: center;
-      color: var(--white);
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      position: relative;
-      display: inline-block;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .portfolio-hub-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 4px;
-      background: var(--primary-color);
-      border-radius: 2px;
-    }
-
-    .portfolio-hub-subtitle {
-      text-align: center;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 1.2rem;
-      margin-bottom: 4rem;
-    }
-
-    .portfolio-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 3rem;
-      margin-top: 3rem;
-    }
-
-    .portfolio-card {
-      position: relative;
-      height: 500px;
-      border-radius: 20px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      text-decoration: none;
-    }
-
-    .portfolio-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
-      z-index: 1;
-      transition: all 0.4s ease;
-    }
-
-    .portfolio-card:hover::before {
-      background: linear-gradient(135deg, rgba(60, 179, 113, 0.8) 0%, rgba(42, 157, 95, 0.6) 100%);
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 60px rgba(60, 179, 113, 0.4);
-    }
-
-    .portfolio-card-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.4s ease;
-    }
-
-    .portfolio-card:hover .portfolio-card-bg {
-      transform: scale(1.1);
-    }
-
-    .video-card .portfolio-card-bg {
-      background-image: linear-gradient(135deg, rgba(220, 38, 38, 0.3) 0%, rgba(239, 68, 68, 0.2) 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="%23111" width="400" height="400"/><g fill="%23dc2626" opacity="0.1"><circle cx="100" cy="100" r="60"/><circle cx="300" cy="150" r="80"/><circle cx="200" cy="300" r="70"/></g></svg>');
-    }
-
-    .photo-card .portfolio-card-bg {
-      background-image: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.2) 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect fill="%23111" width="400" height="400"/><g fill="%233b82f6" opacity="0.1"><rect x="50" y="50" width="100" height="100"/><rect x="200" y="100" width="120" height="120"/><rect x="100" y="250" width="90" height="90"/></g></svg>');
-    }
-
-    .portfolio-card-content {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .portfolio-card-icon {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 2rem;
-      color: var(--white);
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-      transition: all 0.4s ease;
-    }
-
-    .portfolio-card:hover .portfolio-card-icon {
-      transform: scale(1.1);
-      color: var(--white);
-    }
-
-    .portfolio-card-title {
-      font-size: 3.5rem;
-      font-weight: 900;
-      color: var(--white);
-      margin-bottom: 1rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    }
-
-    .portfolio-card-description {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.9);
-      max-width: 300px;
-      line-height: 1.6;
-    }
-
-    .portfolio-card-arrow {
-      margin-top: 2rem;
-      width: 50px;
-      height: 50px;
-      border: 2px solid var(--white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .portfolio-card:hover .portfolio-card-arrow {
-      background: var(--white);
-      transform: translateX(5px);
-    }
-
-    .portfolio-card-arrow svg {
-      width: 24px;
-      height: 24px;
-      color: var(--white);
-      transition: color 0.3s ease;
-    }
-
-    .portfolio-card:hover .portfolio-card-arrow svg {
-      color: var(--dark);
-    }
-
-    /* Mobile responsive */
-    @media (max-width: 768px) {
-      .portfolio-cards {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .portfolio-card {
-        height: 400px;
-      }
-
-      .portfolio-card-icon {
-        width: 80px;
-        height: 80px;
-      }
-
-      .portfolio-card-title {
-        font-size: 2.5rem;
-      }
-
-      .portfolio-hub {
-        padding: 6rem 1rem 3rem;
-      }
-    }
-  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -235,54 +31,57 @@
     </div>
   </nav>
 
-  <!-- Portfolio Hub -->
-  <section class="portfolio-hub">
-    <div class="portfolio-hub-content">
-      <h1 class="portfolio-hub-title">My Portfolio</h1>
-      <p class="portfolio-hub-subtitle">Explore my video and photography work</p>
-      
-      <div class="portfolio-cards">
-        <!-- Video Card -->
-        <a href="video-portfolio.html" class="portfolio-card video-card">
-          <div class="portfolio-card-bg"></div>
-          <div class="portfolio-card-content">
-            <svg class="portfolio-card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="8" y="16" width="32" height="32" rx="4"/>
-              <polygon points="40,26 56,18 56,46 40,38" fill="none"/>
-              <circle cx="16" cy="24" r="2" fill="currentColor"/>
-            </svg>
-            <h2 class="portfolio-card-title">Video</h2>
-            <p class="portfolio-card-description">Cinematic productions, short films, and commercial work</p>
-            <div class="portfolio-card-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </div>
-        </a>
-
-        <!-- Photo Card -->
-        <a href="photo-portfolio.html" class="portfolio-card photo-card">
-          <div class="portfolio-card-bg"></div>
-          <div class="portfolio-card-content">
-            <svg class="portfolio-card-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="10" y="16" width="44" height="32" rx="4"/>
-              <circle cx="20" cy="26" r="3"/>
-              <polyline points="14,40 28,30 38,40 46,30 50,34"/>
-              <circle cx="32" cy="8" r="3" fill="currentColor"/>
-            </svg>
-            <h2 class="portfolio-card-title">Photo</h2>
-            <p class="portfolio-card-description">Action shots, events, and sports photography</p>
-            <div class="portfolio-card-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </div>
-        </a>
-      </div>
+  <!-- Portfolio Hub Header -->
+  <header class="portfolio-header">
+    <div class="container">
+      <h1 class="section-title" style="text-align: center;">My Portfolio</h1>
+      <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.2rem; text-align: center; margin-top: 1rem;">Choose your experience</p>
     </div>
-  </section>
+  </header>
+
+  <main>
+    <!-- Portfolio Cards Section -->
+    <section style="padding: 4rem 0; background: var(--white);">
+      <div class="container">
+        <div class="portfolio-hub-grid">
+          
+          <!-- Video Portfolio Card -->
+          <a href="video-portfolio.html" class="portfolio-hub-card video-card">
+            <div class="portfolio-hub-overlay"></div>
+            <div class="portfolio-hub-content">
+              <div class="portfolio-hub-icon">
+                <svg width="80" height="80" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <rect x="10" y="18" width="30" height="28" rx="4"/>
+                  <polygon points="40,28 54,20 54,44 40,36" fill="none"/>
+                </svg>
+              </div>
+              <h2 class="portfolio-hub-title">VIDEO</h2>
+              <p class="portfolio-hub-description">Cinematic storytelling and professional video production</p>
+              <span class="portfolio-hub-cta">View Video Work →</span>
+            </div>
+          </a>
+
+          <!-- Photo Portfolio Card -->
+          <a href="photo-portfolio.html" class="portfolio-hub-card photo-card">
+            <div class="portfolio-hub-overlay"></div>
+            <div class="portfolio-hub-content">
+              <div class="portfolio-hub-icon">
+                <svg width="80" height="80" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <rect x="12" y="20" width="40" height="28" rx="5"/>
+                  <circle cx="20" cy="28" r="3"/>
+                  <polyline points="16,40 28,32 36,40 44,32"/>
+                </svg>
+              </div>
+              <h2 class="portfolio-hub-title">PHOTO</h2>
+              <p class="portfolio-hub-description">Stunning imagery capturing memorable moments</p>
+              <span class="portfolio-hub-cta">View Photo Work →</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -323,5 +122,4 @@
 
   <script src="script.js"></script>
 </body>
-</html>
 </html>
