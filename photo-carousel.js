@@ -1,112 +1,116 @@
-// Photo Carousel Functionality
-console.log('Photo carousel script loaded');
+// ===== SIMPLE PHOTO CAROUSEL - TWO CAROUSELS =====
+console.log('🎠 Carousel script loading...');
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing carousels');
-    
-    // Find all carousels
-    const carousels = document.querySelectorAll('.carousel-track');
-    console.log(`Found ${carousels.length} carousel(s)`);
-    
-    carousels.forEach((track, index) => {
-        const carouselId = track.getAttribute('data-carousel');
-        console.log(`Initializing carousel: ${carouselId}`);
-        
-        const slides = track.querySelectorAll('.carousel-slide');
-        const prevButton = document.querySelector(`.carousel-button.prev[data-carousel="${carouselId}"]`);
-        const nextButton = document.querySelector(`.carousel-button.next[data-carousel="${carouselId}"]`);
-        const currentSlideSpan = document.querySelector(`.current-slide[data-carousel="${carouselId}"]`);
-        
-        console.log(`Carousel ${carouselId}: ${slides.length} slides, prev button: ${!!prevButton}, next button: ${!!nextButton}`);
-        
-        let currentIndex = 0;
-        
-        function updateCarousel() {
-            const offset = -currentIndex * 100;
-            track.style.transform = `translateX(${offset}%)`;
-            
-            if (currentSlideSpan) {
-                currentSlideSpan.textContent = currentIndex + 1;
-            }
-            
-            // Update button states
-            if (prevButton) {
-                prevButton.disabled = currentIndex === 0;
-                prevButton.style.opacity = currentIndex === 0 ? '0.5' : '1';
-            }
-            if (nextButton) {
-                nextButton.disabled = currentIndex === slides.length - 1;
-                nextButton.style.opacity = currentIndex === slides.length - 1 ? '0.5' : '1';
-            }
-            
-            console.log(`Carousel ${carouselId} updated to slide ${currentIndex + 1}/${slides.length}`);
-        }
-        
-        // Next button
-        if (nextButton) {
-            nextButton.addEventListener('click', function() {
-                console.log(`Next button clicked for ${carouselId}`);
-                if (currentIndex < slides.length - 1) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            });
-        }
-        
-        // Previous button
-        if (prevButton) {
-            prevButton.addEventListener('click', function() {
-                console.log(`Prev button clicked for ${carouselId}`);
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarousel();
-                }
-            });
-        }
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft' && currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            } else if (e.key === 'ArrowRight' && currentIndex < slides.length - 1) {
-                currentIndex++;
-                updateCarousel();
-            }
-        });
-        
-        // Touch support for mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        track.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        track.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0 && currentIndex < slides.length - 1) {
-                    // Swipe left (next)
-                    currentIndex++;
-                    updateCarousel();
-                } else if (diff < 0 && currentIndex > 0) {
-                    // Swipe right (previous)
-                    currentIndex--;
-                    updateCarousel();
-                }
-            }
-        }
-        
-        // Initialize
-        updateCarousel();
-        console.log(`Carousel ${carouselId} initialized successfully`);
-    });
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('✅ DOM loaded, initializing carousels...');
+  
+  // FIVES CAROUSEL
+  const fivesTrack = document.getElementById('fives-track');
+  const fivesLeft = document.getElementById('fives-left');
+  const fivesRight = document.getElementById('fives-right');
+  
+  if (fivesTrack && fivesLeft && fivesRight) {
+    console.log('✅ Fives carousel elements found');
+    initCarousel(fivesTrack, fivesLeft, fivesRight, 'Fives');
+  } else {
+    console.log('❌ Fives carousel elements NOT found');
+  }
+  
+  // 11-A-SIDE CAROUSEL
+  const asideTrack = document.getElementById('11aside-track');
+  const asideLeft = document.getElementById('11aside-left');
+  const asideRight = document.getElementById('11aside-right');
+  
+  if (asideTrack && asideLeft && asideRight) {
+    console.log('✅ 11-a-side carousel elements found');
+    initCarousel(asideTrack, asideLeft, asideRight, '11-a-side');
+  } else {
+    console.log('❌ 11-a-side carousel elements NOT found');
+  }
 });
+
+function initCarousel(track, leftBtn, rightBtn, name) {
+  const images = track.querySelectorAll('img');
+  console.log(`📸 ${name}: Found ${images.length} images`);
+  
+  if (images.length === 0) {
+    console.log(`❌ ${name}: No images found!`);
+    return;
+  }
+  
+  // Settings
+  const imageWidth = 280;
+  const gap = 24;
+  const scrollAmount = imageWidth + gap;
+  
+  let currentPosition = 0;
+  let maxScroll = -(scrollAmount * Math.max(0, images.length - 3));
+  
+  console.log(`${name}: Max scroll = ${maxScroll}px`);
+  
+  // Update button states
+  function updateButtons() {
+    if (currentPosition >= 0) {
+      leftBtn.disabled = true;
+      leftBtn.style.opacity = '0.3';
+    } else {
+      leftBtn.disabled = false;
+      leftBtn.style.opacity = '1';
+    }
+    
+    if (currentPosition <= maxScroll) {
+      rightBtn.disabled = true;
+      rightBtn.style.opacity = '0.3';
+    } else {
+      rightBtn.disabled = false;
+      rightBtn.style.opacity = '1';
+    }
+  }
+  
+  // Left button click
+  leftBtn.addEventListener('click', () => {
+    if (currentPosition >= 0) return;
+    
+    currentPosition += scrollAmount;
+    if (currentPosition > 0) currentPosition = 0;
+    
+    track.style.transform = `translateX(${currentPosition}px)`;
+    console.log(`${name}: ← Scrolled left to ${currentPosition}px`);
+    updateButtons();
+  });
+  
+  // Right button click
+  rightBtn.addEventListener('click', () => {
+    if (currentPosition <= maxScroll) return;
+    
+    currentPosition -= scrollAmount;
+    if (currentPosition < maxScroll) currentPosition = maxScroll;
+    
+    track.style.transform = `translateX(${currentPosition}px)`;
+    console.log(`${name}: → Scrolled right to ${currentPosition}px`);
+    updateButtons();
+  });
+  
+  // Check for image load errors
+  images.forEach((img, index) => {
+    img.addEventListener('error', () => {
+      console.log(`❌ ${name}: Image ${index + 1} failed to load: ${img.src}`);
+    });
+    
+    img.addEventListener('load', () => {
+      console.log(`✅ ${name}: Image ${index + 1} loaded successfully`);
+    });
+  });
+  
+  // Initial state
+  updateButtons();
+  console.log(`✅ ${name}: Carousel initialized!`);
+  
+  // Recalculate on window resize
+  window.addEventListener('resize', () => {
+    maxScroll = -(scrollAmount * Math.max(0, images.length - 3));
+    currentPosition = 0;
+    track.style.transform = 'translateX(0)';
+    updateButtons();
+  });
+}
