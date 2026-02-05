@@ -1,105 +1,116 @@
-// ===== PHOTO CAROUSEL =====
+// ===== SIMPLE PHOTO CAROUSEL - TWO CAROUSELS =====
+console.log('🎠 Carousel script loading...');
+
 document.addEventListener('DOMContentLoaded', () => {
-  const track = document.querySelector('.photo-carousel-track');
-  const leftBtn = document.querySelector('.carousel-btn-left');
-  const rightBtn = document.querySelector('.carousel-btn-right');
+  console.log('✅ DOM loaded, initializing carousels...');
   
-  if (!track || !leftBtn || !rightBtn) return;
+  // FIVES CAROUSEL
+  const fivesTrack = document.getElementById('fives-track');
+  const fivesLeft = document.getElementById('fives-left');
+  const fivesRight = document.getElementById('fives-right');
   
+  if (fivesTrack && fivesLeft && fivesRight) {
+    console.log('✅ Fives carousel elements found');
+    initCarousel(fivesTrack, fivesLeft, fivesRight, 'Fives');
+  } else {
+    console.log('❌ Fives carousel elements NOT found');
+  }
+  
+  // 11-A-SIDE CAROUSEL
+  const asideTrack = document.getElementById('11aside-track');
+  const asideLeft = document.getElementById('11aside-left');
+  const asideRight = document.getElementById('11aside-right');
+  
+  if (asideTrack && asideLeft && asideRight) {
+    console.log('✅ 11-a-side carousel elements found');
+    initCarousel(asideTrack, asideLeft, asideRight, '11-a-side');
+  } else {
+    console.log('❌ 11-a-side carousel elements NOT found');
+  }
+});
+
+function initCarousel(track, leftBtn, rightBtn, name) {
   const images = track.querySelectorAll('img');
-  const imageWidth = 280; // Width of each image + gap
-  const gap = 24; // 1.5rem gap
+  console.log(`📸 ${name}: Found ${images.length} images`);
+  
+  if (images.length === 0) {
+    console.log(`❌ ${name}: No images found!`);
+    return;
+  }
+  
+  // Settings
+  const imageWidth = 280;
+  const gap = 24;
   const scrollAmount = imageWidth + gap;
   
   let currentPosition = 0;
-  const maxScroll = -(scrollAmount * (images.length - Math.floor(track.parentElement.offsetWidth / scrollAmount)));
+  let maxScroll = -(scrollAmount * Math.max(0, images.length - 3));
+  
+  console.log(`${name}: Max scroll = ${maxScroll}px`);
   
   // Update button states
   function updateButtons() {
-    leftBtn.disabled = currentPosition >= 0;
-    rightBtn.disabled = currentPosition <= maxScroll;
+    if (currentPosition >= 0) {
+      leftBtn.disabled = true;
+      leftBtn.style.opacity = '0.3';
+    } else {
+      leftBtn.disabled = false;
+      leftBtn.style.opacity = '1';
+    }
     
-    leftBtn.style.opacity = currentPosition >= 0 ? '0.5' : '1';
-    rightBtn.style.opacity = currentPosition <= maxScroll ? '0.5' : '1';
+    if (currentPosition <= maxScroll) {
+      rightBtn.disabled = true;
+      rightBtn.style.opacity = '0.3';
+    } else {
+      rightBtn.disabled = false;
+      rightBtn.style.opacity = '1';
+    }
   }
   
-  // Scroll left
+  // Left button click
   leftBtn.addEventListener('click', () => {
-    currentPosition = Math.min(currentPosition + scrollAmount, 0);
+    if (currentPosition >= 0) return;
+    
+    currentPosition += scrollAmount;
+    if (currentPosition > 0) currentPosition = 0;
+    
     track.style.transform = `translateX(${currentPosition}px)`;
+    console.log(`${name}: ← Scrolled left to ${currentPosition}px`);
     updateButtons();
   });
   
-  // Scroll right
+  // Right button click
   rightBtn.addEventListener('click', () => {
-    currentPosition = Math.max(currentPosition - scrollAmount, maxScroll);
+    if (currentPosition <= maxScroll) return;
+    
+    currentPosition -= scrollAmount;
+    if (currentPosition < maxScroll) currentPosition = maxScroll;
+    
     track.style.transform = `translateX(${currentPosition}px)`;
+    console.log(`${name}: → Scrolled right to ${currentPosition}px`);
     updateButtons();
   });
   
-  // Touch support for mobile
-  let startX = 0;
-  let currentX = 0;
-  let isDragging = false;
-  
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    isDragging = true;
+  // Check for image load errors
+  images.forEach((img, index) => {
+    img.addEventListener('error', () => {
+      console.log(`❌ ${name}: Image ${index + 1} failed to load: ${img.src}`);
+    });
+    
+    img.addEventListener('load', () => {
+      console.log(`✅ ${name}: Image ${index + 1} loaded successfully`);
+    });
   });
   
-  track.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    const newPosition = currentPosition + diff;
-    
-    // Don't go beyond bounds
-    if (newPosition <= 0 && newPosition >= maxScroll) {
-      track.style.transform = `translateX(${newPosition}px)`;
-    }
-  });
-  
-  track.addEventListener('touchend', (e) => {
-    if (!isDragging) return;
-    isDragging = false;
-    
-    const diff = currentX - startX;
-    
-    // Snap to nearest image
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        // Swiped right
-        currentPosition = Math.min(currentPosition + scrollAmount, 0);
-      } else {
-        // Swiped left
-        currentPosition = Math.max(currentPosition - scrollAmount, maxScroll);
-      }
-    }
-    
-    track.style.transform = `translateX(${currentPosition}px)`;
-    updateButtons();
-  });
-  
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      leftBtn.click();
-    } else if (e.key === 'ArrowRight') {
-      rightBtn.click();
-    }
-  });
-  
-  // Initial button state
+  // Initial state
   updateButtons();
+  console.log(`✅ ${name}: Carousel initialized!`);
   
-  // Update on window resize
-  let resizeTimeout;
+  // Recalculate on window resize
   window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      currentPosition = 0;
-      track.style.transform = 'translateX(0)';
-      updateButtons();
-    }, 250);
+    maxScroll = -(scrollAmount * Math.max(0, images.length - 3));
+    currentPosition = 0;
+    track.style.transform = 'translateX(0)';
+    updateButtons();
   });
-});
+}
