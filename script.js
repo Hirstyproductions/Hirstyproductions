@@ -64,7 +64,7 @@ const observerOptions = {
   rootMargin: '0px 0px -100px 0px'
 };
 
-const fadeInElements = document.querySelectorAll('.service-card, .video-item, .client-logo, .portfolio-video-item, .photo-item');
+const fadeInElements = document.querySelectorAll('.service-card, .video-item, .client-logo, .photo-item');
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
