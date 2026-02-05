@@ -2,301 +2,244 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Hirsty Productions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hirsty Productions | Professional Video Production</title>
+  <meta name="description" content="Professional videography, photography, and editing services by Hirsty Productions. Your vision, professionally produced.">
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <a href="index.html" class="site-title">HIRSTY PRODUCTIONS</a>
-    <nav class="top-menu" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="portfolio.html">Portfolio</a>
-    </nav>
-  </div>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">▶</span>
+        HIRSTY PRODUCTIONS
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="#contact" class="nav-link nav-cta">Get in Touch</a>
+      </div>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-  <header class="welcome-banner" style="text-align:center;">
-    <h1 class="welcome-title" style="margin:0;">
-      <span class="welcome-top">WELCOME TO</span><br>
-      <span class="welcome-bottom">HIRSTY PRODUCTIONS</span>
-    </h1>
-    <div class="welcome-subtitle">Your vision, professionally produced.</div>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <span class="hero-title-top">WELCOME TO</span>
+          <span class="hero-title-main">HIRSTY PRODUCTIONS</span>
+        </h1>
+        <p class="hero-subtitle">Your vision, professionally produced.</p>
+      </div>
+      <div class="scroll-indicator">
+        <div class="scroll-dot"></div>
+      </div>
+    </div>
   </header>
 
   <main>
-    <section class="showreel">
-      <h2>Showreel</h2>
-      <div class="video-wrapper">
-        <iframe
-          class="showreel-iframe"
-          src="https://www.youtube.com/embed/iGTNLc4Vkuo?start=1&autoplay=1&mute=1&playsinline=1&rel=0"
-          title="Hirsty Productions Showreel"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-          allowfullscreen
-          loading="eager"></iframe>
-      </div>
-    </section>
-
-    <section class="services">
-      <h2>Services</h2>
-      <div class="service-list">
-        <div class="service-item">
-          <svg width="100" height="100" viewBox="0 0 64 64" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="10" y="18" width="30" height="28" rx="4"/>
-            <polygon points="40,28 54,20 54,44 40,36" fill="none"/>
-          </svg>
-          <p>VIDEOGRAPHY</p>
-        </div>
-        <div class="service-item">
-          <svg width="100" height="100" viewBox="0 0 64 64" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="12" y="20" width="40" height="28" rx="5"/>
-            <circle cx="20" cy="28" r="3"/>
-            <polyline points="16,40 28,32 36,40 44,32"/>
-          </svg>
-          <p>PHOTOGRAPHY</p>
-        </div>
-        <div class="service-item">
-          <svg width="100" height="100" viewBox="0 0 64 64" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="22" cy="42" r="7"/>
-            <circle cx="42" cy="22" r="7"/>
-            <line x1="30" y1="34" x2="54" y2="58"/>
-            <line x1="34" y1="30" x2="58" y2="54"/>
-          </svg>
-          <p>EDITING</p>
+    <!-- Showreel Section -->
+    <section class="showreel-section" id="showreel">
+      <div class="container">
+        <h2 class="section-title">Showreel</h2>
+        <div class="showreel-wrapper">
+          <div class="video-container">
+            <iframe
+              class="showreel-video"
+              src="https://www.youtube.com/embed/iGTNLc4Vkuo?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1"
+              title="Hirsty Productions Showreel"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+              allowfullscreen
+              loading="eager">
+            </iframe>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="my-videos">
-      <h2>My Videos</h2>
-      <div class="video-row">
-        <iframe src="https://www.youtube.com/embed/qR1ZKKu2WGo"
-          title="Encore (2024) | Festival S..." frameborder="0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/S3I5iOi9lpw"
-          title="The Break In - Short Film" frameborder="0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/QchzTBHIGfg"
-          title="Super 6 Winner Takes All!" frameborder="0" allowfullscreen></iframe>
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <h2 class="section-title">What I Do</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="10" y="18" width="30" height="28" rx="4"/>
+                <polygon points="40,28 54,20 54,44 40,36" fill="none"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Videography</h3>
+            <p class="service-description">Cinematic storytelling that captures your moments with professional quality and creative vision.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="12" y="20" width="40" height="28" rx="5"/>
+                <circle cx="20" cy="28" r="3"/>
+                <polyline points="16,40 28,32 36,40 44,32"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Photography</h3>
+            <p class="service-description">Stunning imagery that tells your story through powerful, memorable visuals.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="22" cy="42" r="7"/>
+                <circle cx="42" cy="22" r="7"/>
+                <line x1="30" y1="34" x2="54" y2="58"/>
+                <line x1="34" y1="30" x2="58" y2="54"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Editing</h3>
+            <p class="service-description">Polished post-production that brings your content to life with precision and style.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="clients">
-      <h2>Worked With</h2>
-      <div class="client-logos">
-        <a href="https://www.football5s.com/" target="_blank" rel="noopener">
-          <img src="https://www.football5s.com/wp-content/uploads/2021/10/VMWS23DQ.png" alt="Fives logo">
-        </a>
-        <a href="https://www.adi.tv/" target="_blank" rel="noopener">
-          <img src="https://www.adi.tv/wp-content/uploads/2021/07/ADI-BRAND-GENERIC-GREY.png" alt="ADI TV logo">
-        </a>
-        <a href="https://blackfriarsfc.co.uk/" target="_blank" rel="noopener">
-          <img src="https://blackfriarsfc.co.uk/wp-content/uploads/2023/12/bfcwhite.png" alt="Blackfriars FC logo">
-        </a>
+    <!-- Featured Work Section -->
+    <section class="featured-section" id="work">
+      <div class="container">
+        <h2 class="section-title">Featured Work</h2>
+        <div class="video-grid">
+          <div class="video-item">
+            <iframe 
+              src="https://www.youtube.com/embed/qR1ZKKu2WGo"
+              title="Encore (2024) | Festival Short"
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-item">
+            <iframe 
+              src="https://www.youtube.com/embed/S3I5iOi9lpw"
+              title="The Break In - Short Film"
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-item">
+            <iframe 
+              src="https://www.youtube.com/embed/QchzTBHIGfg"
+              title="Super 6 Winner Takes All!"
+              frameborder="0" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        <div class="cta-button-wrapper">
+          <a href="portfolio.html" class="btn-primary">View Full Portfolio</a>
+        </div>
       </div>
     </section>
 
-    <section class="contact">
-      <h2>Contact Us</h2>
-      <div class="contact-form">
-        <form action="https://formspree.io/f/xqadwozq" method="POST">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required autocomplete="name">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required autocomplete="email">
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="4" required></textarea>
-          <button type="submit">Send</button>
-        </form>
-        <p>Or email: <a href="mailto:matt.hirst@hirstyproductions.com">matt.hirst@hirstyproductions.com</a></p>
+    <!-- Clients Section -->
+    <section class="clients-section" id="clients">
+      <div class="container">
+        <h2 class="section-title">Trusted By</h2>
+        <div class="client-logos">
+          <a href="https://www.football5s.com/" target="_blank" rel="noopener" class="client-logo">
+            <img src="https://www.football5s.com/wp-content/uploads/2021/10/VMWS23DQ.png" alt="Fives">
+          </a>
+          <a href="https://www.adi.tv/" target="_blank" rel="noopener" class="client-logo">
+            <img src="https://www.adi.tv/wp-content/uploads/2021/07/ADI-BRAND-GENERIC-GREY.png" alt="ADI TV">
+          </a>
+          <a href="https://blackfriarsfc.co.uk/" target="_blank" rel="noopener" class="client-logo">
+            <img src="https://blackfriarsfc.co.uk/wp-content/uploads/2023/12/bfcwhite.png" alt="Blackfriars FC">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <h2 class="section-title">Let's Work Together</h2>
+            <p class="contact-description">Ready to bring your vision to life? Get in touch and let's create something amazing.</p>
+            <div class="contact-details">
+              <div class="contact-detail">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                <a href="mailto:matt.hirst@hirstyproductions.com">matt.hirst@hirstyproductions.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form-wrapper">
+            <form class="contact-form" action="https://formspree.io/f/xqadwozq" method="POST">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Bottom Socials Bar -->
-  <div class="bottom-bar">
-    <div class="bottom-bar-content">
-      <span class="bottom-bar-title">Hirsty Productions</span>
-      <div class="bottom-bar-icons">
-        <a href="https://www.instagram.com/hirstyproductions/" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="7" fill="#fff"/><path d="M16.5 7.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12 8.75A3.25 3.25 0 1 0 12 15.25a3.25 3.25 0 0 0 0-6.5Zm0 1.5a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5ZM7.25 4A3.25 3.25 0 0 0 4 7.25v9.5A3.25 3.25 0 0 0 7.25 20h9.5A3.25 3.25 0 0 0 20 16.75v-9.5A3.25 3.25 0 0 0 16.75 4h-9.5Zm0 1.5h9.5c.97 0 1.75.78 1.75 1.75v9.5c0 .97-.78 1.75-1.75 1.75h-9.5A1.75 1.75 0 0 1 5.5 16.75v-9.5c0-.97.78-1.75 1.75-1.75Z" fill="#000"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/matthew-hirst-950298206/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="7" fill="#fff"/><path d="M16.5 7.5A1.5 1.5 0 0 0 15 6h-6a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 9 18h6a1.5 1.5 0 0 0 1.5-1.5v-9ZM8.56 17.25h-2.01V10h2.01v7.25ZM7.56 8.75a1.01 1.01 0 1 1 0-2.02 1.01 1.01 0 0 1 0 2.02Zm9.19 8.5h-2.01v-3.62c0-.86-.32-1.45-1.12-1.45-.61 0-.97.41-1.13.81-.06.14-.08.34-.08.54v3.72h-2.01s.03-6.04 0-7.25h2.01v1.03c.27-.42.76-1.03 1.85-1.03 1.35 0 2.36.88 2.36 2.77v4.48Z" fill="#000"/></svg>
-        </a>
-        <a href="https://www.youtube.com/@hirstyproductions" target="_blank" rel="noopener" aria-label="YouTube">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="7" fill="#fff"/><path d="M19.5 8.26A2.5 2.5 0 0 0 17.1 6.5C15.3 6 12 6 12 6s-3.3 0-5.1.5A2.5 2.5 0 0 0 4.5 8.26C4 10.07 4 12 4 12s0 1.93.5 3.74a2.5 2.5 0 0 0 2.4 1.76C8.7 18 12 18 12 18s3.3 0 5.1-.5c1.1-.22 2-1.03 2.4-1.76.5-1.81.5-3.74.5-3.74s0-1.93-.5-3.74ZM10 15.5V8.5l6 3.5-6 3.5Z" fill="#000"/></svg>
-        </a>
-        <a href="https://www.tiktok.com/@hirstyproductions?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="TikTok">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="7" fill="#fff"/><path d="M16.75 8.75a3.25 3.25 0 0 1-3.25-3.25V4h-2.5v10.5a1.25 1.25 0 1 1-1.25-1.25V11a3.25 3.25 0 1 0 3.25 3.25V9.5a5.25 5.25 0 0 0 5.25 5.25h.5V12c-1.93 0-3.5-1.57-3.5-3.5V8.75Z" fill="#000"/></svg>
-        </a>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>HIRSTY PRODUCTIONS</h3>
+          <p>Professional video production services</p>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/hirstyproductions/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/matthew-hirst-950298206/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a href="https://www.youtube.com/@hirstyproductions" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <a href="https://www.tiktok.com/@hirstyproductions" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Hirsty Productions. All rights reserved.</p>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <script>
-  (function () {
-    const iframe = document.querySelector('.showreel-iframe');
-    const wrapper = document.querySelector('.showreel .video-wrapper');
-    if (!iframe || !wrapper) return;
-
-    // Create floating container and move iframe into it (full-viewport)
-    function createFloating() {
-      const floating = document.createElement('div');
-      floating.className = 'fp-floating';
-      Object.assign(floating.style, {
-        position: 'fixed',
-        left: '0',
-        top: '0',
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 9999,
-        pointerEvents: 'auto',
-        background: 'rgba(0,0,0,1)',
-        transition: 'transform 700ms cubic-bezier(.2,.9,.3,1), background 700ms ease, border-radius 700ms ease'
-      });
-      // make iframe fill the floating container
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-      iframe.style.border = 'none';
-      iframe.style.maxWidth = '100%';
-      iframe.style.maxHeight = '100%';
-      iframe.style.borderRadius = '0';
-      // move iframe
-      floating.appendChild(iframe);
-      document.body.appendChild(floating);
-      return floating;
-    }
-
-    // Animate floating container from fullscreen into the wrapper target,
-    // fading the background at the same time so it morphs + fades
-    function animateToInline(floating) {
-      const targetRect = wrapper.getBoundingClientRect();
-      const floatingRect = floating.getBoundingClientRect();
-
-      const scaleX = targetRect.width / floatingRect.width;
-      const scaleY = targetRect.height / floatingRect.height;
-      const translateX = targetRect.left - floatingRect.left;
-      const translateY = targetRect.top - floatingRect.top;
-
-      // ensure transitions are present
-      floating.style.transition = 'transform 700ms cubic-bezier(.2,.9,.3,1), background 700ms ease, border-radius 700ms ease';
-      // animate to target (morph) and fade background
-      requestAnimationFrame(() => {
-        floating.style.transformOrigin = 'top left';
-        floating.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
-        floating.style.background = 'rgba(0,0,0,0)'; // fade background
-        // round the corners visually as it morphs
-        floating.style.borderRadius = '12px';
-        // slightly round iframe
-        iframe.style.borderRadius = '12px';
-      });
-
-      // After the morph completes, re-parent floating into wrapper in a way that avoids visual jump.
-      floating.addEventListener('transitionend', function onEnd(e) {
-        if (e.propertyName !== 'transform') return;
-        floating.removeEventListener('transitionend', onEnd);
-
-        // compute rects to keep the element visually in the same place while reparenting
-        const floatingRectAfter = floating.getBoundingClientRect();
-        const wrapperRect = wrapper.getBoundingClientRect();
-        const dx = floatingRectAfter.left - wrapperRect.left;
-        const dy = floatingRectAfter.top - wrapperRect.top;
-        const w = floatingRectAfter.width;
-        const h = floatingRectAfter.height;
-
-        // stop transitions for immediate placement
-        floating.style.transition = 'none';
-        floating.style.transform = 'none';
-        // set absolute coords relative to wrapper so when appended it stays put visually
-        floating.style.position = 'absolute';
-        floating.style.left = dx + 'px';
-        floating.style.top = dy + 'px';
-        floating.style.width = w + 'px';
-        floating.style.height = h + 'px';
-        floating.style.zIndex = 10;
-        // append to wrapper
-        wrapper.style.position = wrapper.style.position || 'relative';
-        wrapper.appendChild(floating);
-
-        // now animate the floating to fill the wrapper (small final smoothing)
-        requestAnimationFrame(() => {
-          floating.style.transition = 'all 300ms ease';
-          floating.style.left = '0';
-          floating.style.top = '0';
-          floating.style.width = '100%';
-          floating.style.height = '100%';
-          floating.style.borderRadius = '12px';
-          floating.style.background = 'transparent';
-        });
-
-        // after that final small transition, tidy up (remove inlined sizes so CSS controls layout)
-        floating.addEventListener('transitionend', function cleanup(ev) {
-          if (ev.propertyName !== 'width' && ev.propertyName !== 'height') return;
-          floating.removeEventListener('transitionend', cleanup);
-          floating.style.transition = '';
-          floating.style.position = 'relative';
-          floating.style.left = '';
-          floating.style.top = '';
-          floating.style.width = '';
-          floating.style.height = '';
-          floating.style.zIndex = '';
-          floating.style.borderRadius = '';
-          // iframe is already inside floating, which sits inside wrapper; everything visually matches the inline layout
-        });
-      });
-    }
-
-    const floating = createFloating();
-
-    // shrink trigger (first meaningful user interaction or timeout)
-    let triggered = false;
-    function triggerShrink() {
-      if (triggered) return;
-      triggered = true;
-      animateToInline(floating);
-      removeListeners();
-    }
-
-    function onWheel() { triggerShrink(); }
-    function onTouch() { triggerShrink(); }
-    function onScroll() {
-      if (window.scrollY > 30) triggerShrink();
-    }
-    function onClick() { triggerShrink(); }
-
-    function removeListeners() {
-      window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('touchstart', onTouch);
-      window.removeEventListener('scroll', onScroll);
-      document.removeEventListener('click', onClick);
-    }
-
-    window.addEventListener('wheel', onWheel, {passive: true});
-    window.addEventListener('touchstart', onTouch, {passive: true});
-    window.addEventListener('scroll', onScroll, {passive: true});
-    document.addEventListener('click', onClick);
-
-    // Auto-shrink after timeout if user doesn't interact
-    const AUTO_SHRINK_MS = 4000;
-    const autoTimer = setTimeout(() => triggerShrink(), AUTO_SHRINK_MS);
-
-    // respects reduced-motion: immediately move iframe back into wrapper without animation
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) {
-      clearTimeout(autoTimer);
-      // quick immediate move: remove floating and append iframe back to wrapper
-      wrapper.style.position = wrapper.style.position || 'relative';
-      wrapper.appendChild(iframe);
-      // remove any floating node (it won't exist if createFloating moved iframe already)
-      const maybeFloating = document.querySelector('.fp-floating');
-      if (maybeFloating && maybeFloating.parentNode) maybeFloating.parentNode.removeChild(maybeFloating);
-      removeListeners();
-    }
-  })();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
