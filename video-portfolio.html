@@ -3,11 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Portfolio | Hirsty Productions</title>
+  <title>Portfolio | Hirsty Productions</title>
+  <meta name="description" content="View Hirsty Productions video and photography portfolio. Professional content creation for sports, events, and more.">
+  <meta name="keywords" content="portfolio, video production, photography, Hirsty Productions">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portfolio | Hirsty Productions">
+  <meta property="og:description" content="Video and photography portfolio - choose your experience.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▶</text></svg>">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    .portfolio-hub {
+      min-height: 100vh;
+      padding: 8rem 2rem 4rem;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    }
+    .portfolio-hub-title {
+      text-align: center;
+      color: white;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .portfolio-hub-subtitle {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.2rem;
+      margin-bottom: 4rem;
+    }
+    .portfolio-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .portfolio-card {
+      position: relative;
+      min-height: 500px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .portfolio-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+    }
+    .video-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .photo-card {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      transition: background 0.3s ease;
+    }
+    .portfolio-card:hover .card-overlay {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .card-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+    }
+    .card-icon {
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    .card-title {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+    .card-description {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+    .card-cta {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .portfolio-card:hover .card-cta {
+      background: white;
+      color: #0a0a0a;
+    }
+    @media (max-width: 768px) {
+      .portfolio-cards {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+      }
+      .portfolio-card {
+        min-height: 400px;
+      }
+      .card-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
 <base target="_blank">
 </head>
 <body>
@@ -18,9 +137,9 @@
         HIRSTY PRODUCTIONS
       </a>
       <div class="nav-links">
-        <a href="index.html" class="nav-link" target="_self">Home</a>
-        <a href="portfolio.html" class="nav-link active" target="_self">Portfolio</a>
-        <a href="index.html#contact" class="nav-link nav-cta" target="_self">Get in Touch</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="portfolio.html" class="nav-link active">Portfolio</a>
+        <a href="index.html#contact" class="nav-link nav-cta">Get in Touch</a>
       </div>
       <button class="mobile-menu-toggle" aria-label="Toggle menu">
         <span></span>
@@ -30,84 +149,43 @@
     </div>
   </nav>
 
-  <header class="portfolio-header">
-    <div class="container">
-      <h1 class="section-title">Video Portfolio</h1>
-      <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.1rem; text-align: center; margin-top: 1rem;">Professional video production work</p>
+  <div class="portfolio-hub">
+    <h1 class="portfolio-hub-title">My Portfolio</h1>
+    <p class="portfolio-hub-subtitle">Choose your experience</p>
+    
+    <div class="portfolio-cards">
+      <a href="video-portfolio.html" class="portfolio-card video-card">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <div class="card-icon">
+            <svg width="80" height="80" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="10" y="18" width="30" height="28" rx="4"/>
+              <polygon points="40,28 54,20 54,44 40,36" fill="none"/>
+            </svg>
+          </div>
+          <h2 class="card-title">VIDEO</h2>
+          <p class="card-description">Cinematic storytelling and professional video production</p>
+          <span class="card-cta">View Video Work →</span>
+        </div>
+      </a>
+
+      <a href="photo-portfolio.html" class="portfolio-card photo-card">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <div class="card-icon">
+            <svg width="80" height="80" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="12" y="20" width="40" height="28" rx="5"/>
+              <circle cx="20" cy="28" r="3"/>
+              <polyline points="16,40 28,32 36,40 44,32"/>
+            </svg>
+          </div>
+          <h2 class="card-title">PHOTO</h2>
+          <p class="card-description">Stunning imagery capturing memorable moments</p>
+          <span class="card-cta">View Photo Work →</span>
+        </div>
+      </a>
     </div>
-  </header>
-
-  <main>
-    <section class="portfolio-section">
-      <div class="container">
-        <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2.5rem; color: #222;">Hirsty Productions Originals</h2>
-        <div class="portfolio-videos">
-          <div class="portfolio-video-item">
-            <iframe 
-              src="https://www.youtube.com/embed/qR1ZKKu2WGo" 
-              title="Encore (2024)" 
-              frameborder="0" 
-              allowfullscreen>
-            </iframe>
-          </div>
-          <div class="portfolio-video-item">
-            <iframe 
-              src="https://www.youtube.com/embed/S3I5iOi9lpw" 
-              title="The Break In" 
-              frameborder="0" 
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-section">
-      <div class="container">
-        <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2.5rem; color: #222;">Fives</h2>
-        <div class="portfolio-videos">
-          <div class="portfolio-video-item">
-            <iframe 
-              src="https://www.youtube.com/embed/QchzTBHIGfg" 
-              title="Super 6 Winner Takes All!" 
-              frameborder="0" 
-              allowfullscreen>
-            </iframe>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-section">
-      <div class="container">
-        <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2.5rem; color: #222;">Blackfriars FC</h2>
-        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
-          <iframe 
-            src="https://www.youtube.com/embed/1jiyS-R74JE" 
-            title="Blackfriars FC Short 1" 
-            frameborder="0" 
-            allowfullscreen
-            style="width: 200px; height: 355px; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border: none;">
-          </iframe>
-          <iframe 
-            src="https://www.youtube.com/embed/9ZrhBL2Oqlg" 
-            title="Blackfriars FC Short 2" 
-            frameborder="0" 
-            allowfullscreen
-            style="width: 200px; height: 355px; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border: none;">
-          </iframe>
-        </div>
-      </div>
-    </section>
-
-    <section style="background: #f5f5f5; padding: 5rem 0; text-align: center;">
-      <div class="container">
-        <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem;">Ready to Start Your Project?</h2>
-        <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">Let's collaborate and create something amazing together.</p>
-        <a href="index.html#contact" class="btn-primary">Get in Touch</a>
-      </div>
-    </section>
-  </main>
+  </div>
 
   <footer class="footer">
     <div class="container">
