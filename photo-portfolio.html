@@ -1,278 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photography Portfolio | Hirsty Productions</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-  <style>
-    .photo-section {
-      padding: 5rem 0;
-    }
-    .photo-section-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      color: #222;
-    }
-    .photo-section-subtitle {
-      text-align: center;
-      font-size: 1.1rem;
-      color: #666;
-      margin-bottom: 3rem;
-    }
-    .carousel-wrapper {
-      position: relative;
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 0 60px;
-    }
-    .carousel-container {
-      overflow: hidden;
-    }
-    .carousel-track {
-      display: flex;
-      gap: 1.5rem;
-      transition: transform 0.5s ease;
-    }
-    .carousel-track img {
-      flex: 0 0 280px;
-      width: 280px;
-      height: 500px;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-    .carousel-track img:hover {
-      transform: scale(1.05);
-    }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
-      background: white;
-      border: none;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      z-index: 10;
-    }
-    .carousel-btn:hover {
-      background: #3cb371;
-      color: white;
-      transform: translateY(-50%) scale(1.1);
-    }
-    .carousel-btn-left {
-      left: 0;
-    }
-    .carousel-btn-right {
-      right: 0;
-    }
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin: 0 auto;
-      max-width: 1200px;
-    }
-    .photo-grid-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      aspect-ratio: 9/16;
-    }
-    .photo-grid-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      background: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      color: #666;
-      border: 2px dashed #666;
-    }
-    @media (max-width: 768px) {
-      .carousel-wrapper {
-        padding: 0 20px;
-      }
-      .carousel-track img {
-        flex: 0 0 220px;
-        width: 220px;
-        height: 390px;
-      }
-      .carousel-btn {
-        width: 40px;
-        height: 40px;
-      }
-    }
-    @media (max-width: 480px) {
-      .carousel-track img {
-        flex: 0 0 180px;
-        width: 180px;
-        height: 320px;
-      }
-      .carousel-btn {
-        display: none;
-      }
-      .carousel-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Portfolio - Hirsty Productions</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Carousel Styles */
+        .photo-section {
+            padding: 80px 20px;
+        }
+        
+        .photo-section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+        
+        .carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+        
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease;
+        }
+        
+        .carousel-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .carousel-button.prev {
+            left: 20px;
+        }
+        
+        .carousel-button.next {
+            right: 20px;
+        }
+        
+        .carousel-indicators {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 1rem;
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="brand">
-        <span class="brand-icon">▶</span>
-        HIRSTY PRODUCTIONS
-      </a>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="portfolio.html" class="nav-link active">Portfolio</a>
-        <a href="index.html#contact" class="nav-link nav-cta">Get in Touch</a>
-      </div>
-      <button class="mobile-menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
-
-  <header class="portfolio-header">
-    <div class="container">
-      <h1 class="section-title" style="text-align: center;">Photography Portfolio</h1>
-      <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.1rem; text-align: center; margin-top: 1rem;">Capturing moments that matter</p>
-    </div>
-  </header>
-
-  <main>
-    <section class="photo-section">
-      <div class="container">
-        <h2 class="photo-section-title">Fives Football</h2>
-        <p class="photo-section-subtitle">Scroll through the action</p>
-        
-        <div class="carousel-wrapper">
-          <button class="carousel-btn carousel-btn-left" aria-label="Previous">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-          
-          <div class="carousel-container">
-            <div class="carousel-track">
-              <img src="webphotos/1_result.webp" alt="Fives Photo 1" loading="lazy">
-              <img src="webphotos/2_result.webp" alt="Fives Photo 2" loading="lazy">
-              <img src="webphotos/3_result.webp" alt="Fives Photo 3" loading="lazy">
-              <img src="webphotos/4_result.webp" alt="Fives Photo 4" loading="lazy">
-              <img src="webphotos/5_result.webp" alt="Fives Photo 5" loading="lazy">
-              <img src="webphotos/6_result.webp" alt="Fives Photo 6" loading="lazy">
-              <img src="webphotos/7_result.webp" alt="Fives Photo 7" loading="lazy">
-              <img src="webphotos/8_result.webp" alt="Fives Photo 8" loading="lazy">
-              <img src="webphotos/9_result.webp" alt="Fives Photo 9" loading="lazy">
-              <img src="webphotos/10_result.webp" alt="Fives Photo 10" loading="lazy">
-              <img src="webphotos/11_result.webp" alt="Fives Photo 11" loading="lazy">
-              <img src="webphotos/12_result.webp" alt="Fives Photo 12" loading="lazy">
-              <img src="webphotos/13_result.webp" alt="Fives Photo 13" loading="lazy">
-              <img src="webphotos/14_result.webp" alt="Fives Photo 14" loading="lazy">
-              <img src="webphotos/15_result.webp" alt="Fives Photo 15" loading="lazy">
-              <img src="webphotos/16_result.webp" alt="Fives Photo 16" loading="lazy">
-              <img src="webphotos/17_result.webp" alt="Fives Photo 17" loading="lazy">
-              <img src="webphotos/18_result.webp" alt="Fives Photo 18" loading="lazy">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">Hirsty Productions</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
             </div>
-          </div>
-          
-          <button class="carousel-btn carousel-btn-right" aria-label="Next">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </button>
         </div>
-      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 120px 20px 80px;">
+        <div class="container" style="text-align: center;">
+            <h1 style="font-size: 3.5rem; color: white; margin-bottom: 20px;">Photography Portfolio</h1>
+            <p style="font-size: 1.3rem; color: rgba(255,255,255,0.9);">Capturing the beautiful game</p>
+        </div>
     </section>
 
+    <!-- Fives Football Carousel -->
+    <section class="photo-section" style="background: white;">
+        <div class="container">
+            <h2 class="photo-section-title">Fives Football</h2>
+            <div class="carousel-container">
+                <button class="carousel-button prev" data-carousel="fives">‹</button>
+                <button class="carousel-button next" data-carousel="fives">›</button>
+                <div class="carousel-track" data-carousel="fives">
+                    <div class="carousel-slide"><img src="webphotos/fives/1_result.webp" alt="Fives Photo 1" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/2_result.webp" alt="Fives Photo 2" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/3_result.webp" alt="Fives Photo 3" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/4_result.webp" alt="Fives Photo 4" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/5_result.webp" alt="Fives Photo 5" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/6_result.webp" alt="Fives Photo 6" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/7_result.webp" alt="Fives Photo 7" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/8_result.webp" alt="Fives Photo 8" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/9_result.webp" alt="Fives Photo 9" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/10_result.webp" alt="Fives Photo 10" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/11_result.webp" alt="Fives Photo 11" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/12_result.webp" alt="Fives Photo 12" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/13_result.webp" alt="Fives Photo 13" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/14_result.webp" alt="Fives Photo 14" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/15_result.webp" alt="Fives Photo 15" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/16_result.webp" alt="Fives Photo 16" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/17_result.webp" alt="Fives Photo 17" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/fives/18_result.webp" alt="Fives Photo 18" loading="lazy"></div>
+                </div>
+                <div class="carousel-indicators">
+                    <span class="current-slide" data-carousel="fives">1</span> / <span class="total-slides">18</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11-a-Side Football Carousel -->
     <section class="photo-section" style="background: #f5f5f5;">
-      <div class="container">
-        <h2 class="photo-section-title">11-a-Side Football</h2>
-        <p class="photo-section-subtitle">Full match day coverage</p>
-        
-        <div class="photo-grid">
-          <div class="photo-grid-item">
-            <div class="photo-placeholder">
-              <p>Upload your 11-a-side photos to<br><code style="background: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9rem; display: inline-block; margin-top: 0.5rem;">webphotos/11aside/</code></p>
+        <div class="container">
+            <h2 class="photo-section-title">11-a-Side Football</h2>
+            <div class="carousel-container">
+                <button class="carousel-button prev" data-carousel="11aside">‹</button>
+                <button class="carousel-button next" data-carousel="11aside">›</button>
+                <div class="carousel-track" data-carousel="11aside">
+                    <div class="carousel-slide"><img src="webphotos/11aside/1.webp" alt="11-a-side Photo 1" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/2.webp" alt="11-a-side Photo 2" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/3.webp" alt="11-a-side Photo 3" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/4.webp" alt="11-a-side Photo 4" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/5.webp" alt="11-a-side Photo 5" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/6.webp" alt="11-a-side Photo 6" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/7.webp" alt="11-a-side Photo 7" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/8.webp" alt="11-a-side Photo 8" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/9.webp" alt="11-a-side Photo 9" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/10.webp" alt="11-a-side Photo 10" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/11.webp" alt="11-a-side Photo 11" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/12.webp" alt="11-a-side Photo 12" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/13.webp" alt="11-a-side Photo 13" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/14.webp" alt="11-a-side Photo 14" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/15.webp" alt="11-a-side Photo 15" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/16.webp" alt="11-a-side Photo 16" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/17.webp" alt="11-a-side Photo 17" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/18.webp" alt="11-a-side Photo 18" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/19.webp" alt="11-a-side Photo 19" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/20.webp" alt="11-a-side Photo 20" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/21.webp" alt="11-a-side Photo 21" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/22.webp" alt="11-a-side Photo 22" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/23.webp" alt="11-a-side Photo 23" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/24.webp" alt="11-a-side Photo 24" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/25.webp" alt="11-a-side Photo 25" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/26.webp" alt="11-a-side Photo 26" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/27.webp" alt="11-a-side Photo 27" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/28.webp" alt="11-a-side Photo 28" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/29.webp" alt="11-a-side Photo 29" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/30.webp" alt="11-a-side Photo 30" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/31.webp" alt="11-a-side Photo 31" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/32.webp" alt="11-a-side Photo 32" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/33.webp" alt="11-a-side Photo 33" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/34.webp" alt="11-a-side Photo 34" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/35.webp" alt="11-a-side Photo 35" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/36.webp" alt="11-a-side Photo 36" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/37.webp" alt="11-a-side Photo 37" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/38.webp" alt="11-a-side Photo 38" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/39.webp" alt="11-a-side Photo 39" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/40.webp" alt="11-a-side Photo 40" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/41.webp" alt="11-a-side Photo 41" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/42.webp" alt="11-a-side Photo 42" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/43.webp" alt="11-a-side Photo 43" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/44.webp" alt="11-a-side Photo 44" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/45.webp" alt="11-a-side Photo 45" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/46.webp" alt="11-a-side Photo 46" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/47.webp" alt="11-a-side Photo 47" loading="lazy"></div>
+                    <div class="carousel-slide"><img src="webphotos/11aside/48.webp" alt="11-a-side Photo 48" loading="lazy"></div>
+                </div>
+                <div class="carousel-indicators">
+                    <span class="current-slide" data-carousel="11aside">1</span> / <span class="total-slides">48</span>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <section style="padding: 5rem 0; background: white; text-align: center;">
-      <div class="container">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 1.5rem;">Need Professional Photography?</h2>
-        <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">Let's capture your moments with stunning imagery.</p>
-        <a href="index.html#contact" class="btn-primary">Get in Touch</a>
-      </div>
+    <!-- Contact CTA -->
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 20px; text-align: center;">
+        <div class="container">
+            <h2 style="color: white; font-size: 2.5rem; margin-bottom: 20px;">Need Professional Photography?</h2>
+            <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 30px;">Let's capture your next event together</p>
+            <a href="index.html#contact" style="display: inline-block; background: white; color: #667eea; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Get in Touch</a>
+        </div>
     </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <h3>HIRSTY PRODUCTIONS</h3>
-          <p>Professional video production services</p>
+    <!-- Footer -->
+    <footer style="background: #1a1a1a; color: white; padding: 40px 20px; text-align: center;">
+        <div class="container">
+            <div style="margin-bottom: 20px;">
+                <a href="https://instagram.com/hirstyproductions" target="_blank" style="color: white; margin: 0 15px; font-size: 1.5rem; text-decoration: none;">📷</a>
+                <a href="https://youtube.com/@hirstyproductions" target="_blank" style="color: white; margin: 0 15px; font-size: 1.5rem; text-decoration: none;">▶️</a>
+            </div>
+            <p style="color: #999;">&copy; 2026 Hirsty Productions. All rights reserved.</p>
         </div>
-        <div class="footer-social">
-          <a href="https://www.instagram.com/hirstyproductions/" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-          </a>
-          <a href="https://www.linkedin.com/in/matthew-hirst-950298206/" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </a>
-          <a href="https://www.youtube.com/@hirstyproductions" target="_blank" rel="noopener" aria-label="YouTube">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-          </a>
-          <a href="https://www.tiktok.com/@hirstyproductions" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Hirsty Productions. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
-  <script src="photo-carousel.js"></script>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
+    <script src="photo-carousel.js"></script>
 </body>
 </html>
