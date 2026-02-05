@@ -196,7 +196,6 @@ a {
   position: relative;
   z-index: 1;
   animation: fadeInUp 1s ease-out;
-  padding-bottom: 5rem; /* Add space for scroll indicator */
 }
 
 @keyframes fadeInUp {
@@ -770,6 +769,9 @@ a {
   padding-bottom: 177.78%; /* 9:16 aspect ratio */
   max-width: 300px;
   margin: 0 auto;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .portfolio-link {
