@@ -155,27 +155,35 @@
       z-index: 10000;
     }
 
-    /* 11-a-side horizontal photos */
+    /* 11-a-side horizontal photos - MUST override default styles */
     #11aside-track img {
-      flex: 0 0 400px;
-      width: 400px;
-      height: 280px;
-      object-fit: cover;
-      cursor: zoom-in;
+      flex: 0 0 400px !important;
+      width: 400px !important;
+      height: 280px !important;
+      object-fit: cover !important;
+      cursor: zoom-in !important;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #11aside-track img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     }
 
     @media (max-width: 768px) {
       #11aside-track img {
-        flex: 0 0 300px;
-        width: 300px;
-        height: 210px;
+        flex: 0 0 300px !important;
+        width: 300px !important;
+        height: 210px !important;
       }
     }
     @media (max-width: 480px) {
       #11aside-track img {
-        flex: 0 0 250px;
-        width: 250px;
-        height: 175px;
+        flex: 0 0 250px !important;
+        width: 250px !important;
+        height: 175px !important;
       }
     }
   </style>
