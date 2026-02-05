@@ -173,3 +173,58 @@ window.addEventListener('scroll', debounce(() => {
 }, 50));
 
 console.log('🎬 Hirsty Productions - Website Loaded Successfully!');
+
+
+// ===== BACK TO TOP BUTTON =====
+function initBackToTop() {
+  // Create button if it doesn't exist
+  let btn = document.getElementById('back-to-top');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.id = 'back-to-top';
+    btn.innerHTML = '↑';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.style.cssText = `
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary-color, #3cb371);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    `;
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.body.appendChild(btn);
+  }
+
+  // Show/hide based on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      btn.style.opacity = '1';
+      btn.style.visibility = 'visible';
+    } else {
+      btn.style.opacity = '0';
+      btn.style.visibility = 'hidden';
+    }
+  });
+}
+
+// Initialize back to top button on mobile
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth <= 768) {
+    initBackToTop();
+  }
+});
