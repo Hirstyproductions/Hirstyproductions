@@ -196,6 +196,7 @@ a {
   position: relative;
   z-index: 1;
   animation: fadeInUp 1s ease-out;
+  padding-bottom: 5rem; /* Add space for scroll indicator */
 }
 
 @keyframes fadeInUp {
@@ -256,6 +257,12 @@ a {
   left: 50%;
   transform: translateX(-50%);
   animation: bounce 2s infinite;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
 }
 
 @keyframes bounce {
@@ -267,7 +274,7 @@ a {
 .scroll-dot {
   width: 30px;
   height: 50px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 25px;
   position: relative;
 }
@@ -288,6 +295,13 @@ a {
 @keyframes scrollDot {
   0% { top: 8px; opacity: 1; }
   100% { top: 30px; opacity: 0; }
+}
+
+/* Hide scroll indicator on mobile and tablets */
+@media (max-width: 968px) {
+  .scroll-indicator {
+    display: none;
+  }
 }
 
 /* ===== CONTAINER ===== */
