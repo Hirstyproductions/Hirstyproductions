@@ -1201,3 +1201,27 @@ a {
   }
 }
 
+/* ===== PORTFOLIO HEADER CENTERING FIX ===== */
+.portfolio-header {
+  padding: 8rem 0 4rem;
+  background: linear-gradient(135deg, var(--dark) 0%, var(--dark-gray) 100%);
+  text-align: center;
+}
+
+.portfolio-header .container {
+  text-align: center;
+}
+
+.portfolio-header .section-title {
+  position: static;
+  transform: none;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--white);
+}
+
+.portfolio-header .section-title::after {
+  left: 50%;
+  transform: translateX(-50%);
+}

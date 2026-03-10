@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://hirstyproductions.com/sitemap.xml
+
+# Crawl-delay (be nice to server)
+Crawl-delay: 1
+
+# Disallow any admin or test pages if they exist
+Disallow: /admin/
+Disallow: /test/
+Disallow: /_old/

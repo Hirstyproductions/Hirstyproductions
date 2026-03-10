@@ -1,116 +1,127 @@
-// ===== SIMPLE PHOTO CAROUSEL - TWO CAROUSELS =====
+// ===== PHOTO CAROUSEL WITH HORIZONTAL 11-A-SIDE SUPPORT =====
 console.log('🎠 Carousel script loading...');
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('✅ DOM loaded, initializing carousels...');
-  
-  // FIVES CAROUSEL
+
+  // FIVES CAROUSEL - Vertical photos
   const fivesTrack = document.getElementById('fives-track');
   const fivesLeft = document.getElementById('fives-left');
   const fivesRight = document.getElementById('fives-right');
-  
+
   if (fivesTrack && fivesLeft && fivesRight) {
     console.log('✅ Fives carousel elements found');
     initCarousel(fivesTrack, fivesLeft, fivesRight, 'Fives');
-  } else {
-    console.log('❌ Fives carousel elements NOT found');
   }
-  
-  // 11-A-SIDE CAROUSEL
+
+  // 11-A-SIDE CAROUSEL - Horizontal photos
   const asideTrack = document.getElementById('11aside-track');
   const asideLeft = document.getElementById('11aside-left');
   const asideRight = document.getElementById('11aside-right');
-  
+
   if (asideTrack && asideLeft && asideRight) {
     console.log('✅ 11-a-side carousel elements found');
     initCarousel(asideTrack, asideLeft, asideRight, '11-a-side');
-  } else {
-    console.log('❌ 11-a-side carousel elements NOT found');
   }
 });
 
 function initCarousel(track, leftBtn, rightBtn, name) {
   const images = track.querySelectorAll('img');
   console.log(`📸 ${name}: Found ${images.length} images`);
-  
+
   if (images.length === 0) {
-    console.log(`❌ ${name}: No images found!`);
+    leftBtn.style.display = 'none';
+    rightBtn.style.display = 'none';
     return;
   }
-  
-  // Settings
-  const imageWidth = 280;
-  const gap = 24;
-  const scrollAmount = imageWidth + gap;
-  
-  let currentPosition = 0;
-  let maxScroll = -(scrollAmount * Math.max(0, images.length - 3));
-  
-  console.log(`${name}: Max scroll = ${maxScroll}px`);
-  
-  // Update button states
-  function updateButtons() {
-    if (currentPosition >= 0) {
-      leftBtn.disabled = true;
-      leftBtn.style.opacity = '0.3';
+
+  // Get image dimensions based on viewport and carousel type
+  function getDimensions() {
+    const viewport = window.innerWidth;
+    const isAside = track.id === '11aside-track';
+
+    if (isAside) {
+      // 11-a-side: horizontal photos
+      if (viewport <= 480) return { width: 250, height: 175, gap: 24 };
+      if (viewport <= 768) return { width: 300, height: 210, gap: 24 };
+      return { width: 400, height: 280, gap: 24 };
     } else {
-      leftBtn.disabled = false;
-      leftBtn.style.opacity = '1';
-    }
-    
-    if (currentPosition <= maxScroll) {
-      rightBtn.disabled = true;
-      rightBtn.style.opacity = '0.3';
-    } else {
-      rightBtn.disabled = false;
-      rightBtn.style.opacity = '1';
+      // Fives: vertical photos
+      if (viewport <= 480) return { width: 180, height: 320, gap: 24 };
+      if (viewport <= 768) return { width: 220, height: 390, gap: 24 };
+      return { width: 280, height: 500, gap: 24 };
     }
   }
-  
-  // Left button click
+
+  let currentPosition = 0;
+  let maxScroll = 0;
+
+  function calculateMaxScroll() {
+    const dims = getDimensions();
+    const containerWidth = track.parentElement.clientWidth;
+    const totalWidth = images.length * (dims.width + dims.gap);
+    maxScroll = -(totalWidth - containerWidth + dims.gap);
+    if (maxScroll > 0) maxScroll = 0;
+    console.log(`${name}: w=${dims.width}, max=${maxScroll}px`);
+  }
+
+  function scrollCarousel() {
+    track.style.transform = `translateX(${currentPosition}px)`;
+    updateButtons();
+  }
+
+  function updateButtons() {
+    leftBtn.disabled = currentPosition >= 0;
+    leftBtn.style.opacity = currentPosition >= 0 ? '0.3' : '1';
+    rightBtn.disabled = currentPosition <= maxScroll;
+    rightBtn.style.opacity = currentPosition <= maxScroll ? '0.3' : '1';
+  }
+
   leftBtn.addEventListener('click', () => {
     if (currentPosition >= 0) return;
-    
-    currentPosition += scrollAmount;
+    const dims = getDimensions();
+    currentPosition += (dims.width + dims.gap);
     if (currentPosition > 0) currentPosition = 0;
-    
-    track.style.transform = `translateX(${currentPosition}px)`;
-    console.log(`${name}: ← Scrolled left to ${currentPosition}px`);
-    updateButtons();
+    scrollCarousel();
   });
-  
-  // Right button click
+
   rightBtn.addEventListener('click', () => {
     if (currentPosition <= maxScroll) return;
-    
-    currentPosition -= scrollAmount;
+    const dims = getDimensions();
+    currentPosition -= (dims.width + dims.gap);
     if (currentPosition < maxScroll) currentPosition = maxScroll;
-    
-    track.style.transform = `translateX(${currentPosition}px)`;
-    console.log(`${name}: → Scrolled right to ${currentPosition}px`);
-    updateButtons();
+    scrollCarousel();
   });
-  
-  // Check for image load errors
-  images.forEach((img, index) => {
+
+  // Handle image load errors
+  images.forEach(img => {
     img.addEventListener('error', () => {
-      console.log(`❌ ${name}: Image ${index + 1} failed to load: ${img.src}`);
+      console.log(`❌ ${name}: Image failed to load, hiding: ${img.src}`);
+      img.style.display = 'none';
     });
-    
+
     img.addEventListener('load', () => {
-      console.log(`✅ ${name}: Image ${index + 1} loaded successfully`);
+      if (img.naturalWidth === 0) {
+        img.style.display = 'none';
+      }
     });
   });
-  
-  // Initial state
-  updateButtons();
-  console.log(`✅ ${name}: Carousel initialized!`);
-  
-  // Recalculate on window resize
+
+  // Recalculate on resize
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    maxScroll = -(scrollAmount * Math.max(0, images.length - 3));
-    currentPosition = 0;
-    track.style.transform = 'translateX(0)';
-    updateButtons();
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      calculateMaxScroll();
+      if (currentPosition < maxScroll) {
+        currentPosition = maxScroll;
+        scrollCarousel();
+      }
+      updateButtons();
+    }, 100);
   });
+
+  calculateMaxScroll();
+  updateButtons();
+  console.log(`✅ ${name}: Carousel ready!`);
 }
