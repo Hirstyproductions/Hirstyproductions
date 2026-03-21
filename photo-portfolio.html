@@ -42,7 +42,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   
   <style>
-    /* Clean Grid Portfolio - Levon Biss Style */
+    /* Clean Masonry Grid - Like Levon Biss */
     body {
       background: #fff;
     }
@@ -65,14 +65,13 @@
       margin-top: 1rem;
     }
     
-    /* Photo Grid */
+    /* Masonry Grid Container */
     .photo-grid {
       max-width: 1400px;
       margin: 0 auto;
       padding: 4rem 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      column-count: 3;
+      column-gap: 1.5rem;
     }
     
     .photo-item {
@@ -80,6 +79,8 @@
       overflow: hidden;
       background: #f5f5f5;
       cursor: pointer;
+      margin-bottom: 1.5rem;
+      break-inside: avoid;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
@@ -97,6 +98,20 @@
     
     .photo-item:hover img {
       transform: scale(1.05);
+    }
+    
+    /* Responsive columns */
+    @media (max-width: 1200px) {
+      .photo-grid {
+        column-count: 2;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .photo-grid {
+        column-count: 1;
+        padding: 2rem 1rem;
+      }
     }
     
     /* Lightbox */
@@ -185,14 +200,8 @@
       fill: none;
     }
     
-    /* Mobile responsive */
+    /* Mobile lightbox */
     @media (max-width: 768px) {
-      .photo-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 2rem 1rem;
-      }
-      
       .lightbox-nav {
         width: 50px;
         height: 50px;
@@ -238,205 +247,8 @@
   </header>
 
   <main>
-    <div class="photo-grid">
-      <!-- Fives Photos -->
-      <div class="photo-item" onclick="openLightbox(this)" data-index="0">
-        <img src="webphotos/Fives/Fives Photo 1.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="1">
-        <img src="webphotos/Fives/Fives Photo 2.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="2">
-        <img src="webphotos/Fives/Fives Photo 3.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="3">
-        <img src="webphotos/Fives/Fives Photo 4.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="4">
-        <img src="webphotos/Fives/Fives Photo 5.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="5">
-        <img src="webphotos/Fives/Fives Photo 6.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="6">
-        <img src="webphotos/Fives/Fives Photo 7.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="7">
-        <img src="webphotos/Fives/Fives Photo 8.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="8">
-        <img src="webphotos/Fives/Fives Photo 9.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="9">
-        <img src="webphotos/Fives/Fives Photo 10.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="10">
-        <img src="webphotos/Fives/Fives Photo 11.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="11">
-        <img src="webphotos/Fives/Fives Photo 12.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="12">
-        <img src="webphotos/Fives/Fives Photo 13.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="13">
-        <img src="webphotos/Fives/Fives Photo 14.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="14">
-        <img src="webphotos/Fives/Fives Photo 15.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="15">
-        <img src="webphotos/Fives/Fives Photo 16.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="16">
-        <img src="webphotos/Fives/Fives Photo 17.webp" alt="Fives football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="17">
-        <img src="webphotos/Fives/Fives Photo 18.webp" alt="Fives football photography" loading="lazy">
-      </div>
-
-      <!-- 11-a-side Photos -->
-      <div class="photo-item" onclick="openLightbox(this)" data-index="18">
-        <img src="webphotos/11aside/11-a-side photo 1.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="19">
-        <img src="webphotos/11aside/11-a-side photo 2.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="20">
-        <img src="webphotos/11aside/11-a-side photo 3.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="21">
-        <img src="webphotos/11aside/11-a-side photo 4.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="22">
-        <img src="webphotos/11aside/11-a-side photo 5.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="23">
-        <img src="webphotos/11aside/11-a-side photo 6.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="24">
-        <img src="webphotos/11aside/11-a-side photo 7.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="25">
-        <img src="webphotos/11aside/11-a-side photo 8.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="26">
-        <img src="webphotos/11aside/11-a-side photo 9.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="27">
-        <img src="webphotos/11aside/11-a-side photo 10.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="28">
-        <img src="webphotos/11aside/11-a-side photo 11.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="29">
-        <img src="webphotos/11aside/11-a-side photo 12.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="30">
-        <img src="webphotos/11aside/11-a-side photo 13.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="31">
-        <img src="webphotos/11aside/11-a-side photo 14.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="32">
-        <img src="webphotos/11aside/11-a-side photo 15.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="33">
-        <img src="webphotos/11aside/11-a-side photo 16.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="34">
-        <img src="webphotos/11aside/11-a-side photo 17.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="35">
-        <img src="webphotos/11aside/11-a-side photo 18.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="36">
-        <img src="webphotos/11aside/11-a-side photo 19.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="37">
-        <img src="webphotos/11aside/11-a-side photo 20.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="38">
-        <img src="webphotos/11aside/11-a-side photo 21.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="39">
-        <img src="webphotos/11aside/11-a-side photo 22.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="40">
-        <img src="webphotos/11aside/11-a-side photo 23.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="41">
-        <img src="webphotos/11aside/11-a-side photo 24.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="42">
-        <img src="webphotos/11aside/11-a-side photo 25.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="43">
-        <img src="webphotos/11aside/11-a-side photo 26.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="44">
-        <img src="webphotos/11aside/11-a-side photo 27.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="45">
-        <img src="webphotos/11aside/11-a-side photo 28.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="46">
-        <img src="webphotos/11aside/11-a-side photo 29.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="47">
-        <img src="webphotos/11aside/11-a-side photo 30.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="48">
-        <img src="webphotos/11aside/11-a-side photo 31.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="49">
-        <img src="webphotos/11aside/11-a-side photo 32.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="50">
-        <img src="webphotos/11aside/11-a-side photo 33.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="51">
-        <img src="webphotos/11aside/11-a-side photo 34.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="52">
-        <img src="webphotos/11aside/11-a-side photo 35.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="53">
-        <img src="webphotos/11aside/11-a-side photo 36.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="54">
-        <img src="webphotos/11aside/11-a-side photo 37.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="55">
-        <img src="webphotos/11aside/11-a-side photo 38.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="56">
-        <img src="webphotos/11aside/11-a-side photo 39.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="57">
-        <img src="webphotos/11aside/11-a-side photo 40.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="58">
-        <img src="webphotos/11aside/11-a-side photo 41.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="59">
-        <img src="webphotos/11aside/11-a-side photo 42.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="60">
-        <img src="webphotos/11aside/11-a-side photo 43.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="61">
-        <img src="webphotos/11aside/11-a-side photo 44.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="62">
-        <img src="webphotos/11aside/11-a-side photo 45.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="63">
-        <img src="webphotos/11aside/11-a-side photo 46.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
-      <div class="photo-item" onclick="openLightbox(this)" data-index="64">
-        <img src="webphotos/11aside/11-a-side photo 47.webp" alt="11-a-side football photography" loading="lazy">
-      </div>
+    <div class="photo-grid" id="photoGrid">
+      <!-- Photos will be generated by JavaScript -->
     </div>
   </main>
 
@@ -495,6 +307,51 @@
   <script src="script.js"></script>
   
   <script>
+    // Generate photo grid dynamically
+    const photoGrid = document.getElementById('photoGrid');
+    const fivesCount = 70;
+    const asideCount = 47;
+    
+    let photoIndex = 0;
+    let allPhotos = [];
+    
+    // Create array of all photos alternating Fives and 11-aside
+    for (let i = 1; i <= Math.max(fivesCount, asideCount); i++) {
+      // Add Fives photo if available
+      if (i <= fivesCount) {
+        allPhotos.push({
+          src: `webphotos/Fives/Fives Photo ${i}.webp`,
+          alt: 'Fives football photography',
+          index: photoIndex++
+        });
+      }
+      
+      // Add 11-aside photo if available
+      if (i <= asideCount) {
+        allPhotos.push({
+          src: `webphotos/11aside/11-a-side photo ${i}.webp`,
+          alt: '11-a-side football photography',
+          index: photoIndex++
+        });
+      }
+    }
+    
+    // Generate HTML for all photos
+    allPhotos.forEach(photo => {
+      const photoItem = document.createElement('div');
+      photoItem.className = 'photo-item';
+      photoItem.setAttribute('data-index', photo.index);
+      photoItem.onclick = function() { openLightbox(this); };
+      
+      const img = document.createElement('img');
+      img.src = photo.src;
+      img.alt = photo.alt;
+      img.loading = 'lazy';
+      
+      photoItem.appendChild(img);
+      photoGrid.appendChild(photoItem);
+    });
+    
     // Lightbox functionality
     let currentImageIndex = 0;
     const allImages = document.querySelectorAll('.photo-item img');
