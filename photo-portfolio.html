@@ -42,7 +42,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   
   <style>
-    /* Clean Masonry Grid - Natural Photo Sizes */
+    /* PROPER Grid Layout - Like Levon Biss */
     body {
       background: #fff;
     }
@@ -65,25 +65,23 @@
       margin-top: 1rem;
     }
     
-    /* TRUE Masonry Grid - Photos keep their natural aspect ratios */
+    /* CSS GRID - Properly handles mixed orientations */
     .photo-grid {
       max-width: 1400px;
       margin: 0 auto;
       padding: 4rem 2rem;
-      column-count: 3;
-      column-gap: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-auto-rows: 20px;
+      gap: 15px;
     }
     
     .photo-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      margin-bottom: 20px;
-      break-inside: avoid;
-      display: inline-block;
-      width: 100%;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
     .photo-item:hover {
@@ -93,7 +91,8 @@
     
     .photo-item img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
       border-radius: 8px;
       transition: transform 0.3s ease;
@@ -103,29 +102,39 @@
       transform: scale(1.03);
     }
     
-    /* Responsive columns */
+    /* Vertical photos take more rows */
+    .photo-item.vertical {
+      grid-row-end: span 25;
+    }
+    
+    /* Horizontal photos take fewer rows */
+    .photo-item.horizontal {
+      grid-row-end: span 15;
+    }
+    
+    /* Responsive */
     @media (max-width: 1200px) {
       .photo-grid {
-        column-count: 2;
-        column-gap: 15px;
-      }
-      .photo-item {
-        margin-bottom: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       }
     }
     
     @media (max-width: 768px) {
       .photo-grid {
-        column-count: 1;
+        grid-template-columns: 1fr;
         padding: 2rem 1rem;
-        column-gap: 0;
       }
-      .photo-item {
-        margin-bottom: 15px;
+      
+      .photo-item.vertical {
+        grid-row-end: span 30;
+      }
+      
+      .photo-item.horizontal {
+        grid-row-end: span 18;
       }
     }
     
-    /* FIXED LIGHTBOX - Full screen size */
+    /* FULL SCREEN LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
@@ -138,54 +147,65 @@
       justify-content: center;
       align-items: center;
       cursor: zoom-out;
+      padding: 0;
     }
     
     .lightbox.active {
       display: flex;
     }
     
-    /* CRITICAL FIX: Full screen image in lightbox */
+    /* MASSIVE FULL SCREEN IMAGE */
+    .lightbox-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
     .lightbox img {
-      max-width: 95vw;
-      max-height: 95vh;
+      max-width: 98vw;
+      max-height: 98vh;
       width: auto;
       height: auto;
       object-fit: contain;
-      border-radius: 4px;
     }
     
     .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
+      position: fixed;
+      top: 25px;
+      right: 35px;
       color: white;
-      font-size: 50px;
+      font-size: 55px;
       cursor: pointer;
-      z-index: 10001;
-      width: 60px;
-      height: 60px;
+      z-index: 10002;
+      width: 65px;
+      height: 65px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.2s ease;
+      transition: all 0.2s ease;
       font-weight: 300;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.3);
     }
     
     .lightbox-close:hover {
       transform: rotate(90deg);
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.8);
+      border-color: rgba(255, 255, 255, 0.6);
     }
     
     /* Navigation arrows */
     .lightbox-nav {
-      position: absolute;
+      position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      width: 70px;
-      height: 70px;
-      background: rgba(255, 255, 255, 0.1);
+      width: 75px;
+      height: 75px;
+      background: rgba(0, 0, 0, 0.5);
       border: 2px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
       display: flex;
@@ -193,26 +213,26 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      z-index: 10001;
+      z-index: 10002;
     }
     
     .lightbox-nav:hover {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.8);
       border-color: rgba(255, 255, 255, 0.6);
       transform: translateY(-50%) scale(1.1);
     }
     
     .lightbox-prev {
-      left: 40px;
+      left: 45px;
     }
     
     .lightbox-next {
-      right: 40px;
+      right: 45px;
     }
     
     .lightbox-nav svg {
-      width: 35px;
-      height: 35px;
+      width: 40px;
+      height: 40px;
       stroke: white;
       stroke-width: 2.5;
       fill: none;
@@ -221,8 +241,16 @@
     /* Mobile lightbox */
     @media (max-width: 768px) {
       .lightbox img {
-        max-width: 98vw;
-        max-height: 98vh;
+        max-width: 100vw;
+        max-height: 100vh;
+      }
+      
+      .lightbox-close {
+        top: 15px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 40px;
       }
       
       .lightbox-nav {
@@ -316,7 +344,7 @@
     </div>
   </footer>
 
-  <!-- Lightbox -->
+  <!-- FULL SCREEN Lightbox -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
     <div class="lightbox-close" onclick="closeLightbox(event)">&times;</div>
     <div class="lightbox-nav lightbox-prev" onclick="previousImage(event)">
@@ -324,12 +352,14 @@
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>
     </div>
+    <div class="lightbox-content">
+      <img src="" alt="Full size photo" id="lightbox-img">
+    </div>
     <div class="lightbox-nav lightbox-next" onclick="nextImage(event)">
       <svg viewBox="0 0 24 24">
         <polyline points="9 18 15 12 9 6"></polyline>
       </svg>
     </div>
-    <img src="" alt="Full size photo" id="lightbox-img">
   </div>
 
   <script src="script.js"></script>
@@ -343,23 +373,25 @@
     let photoIndex = 0;
     let allPhotos = [];
     
-    // Create array of all photos alternating Fives and 11-aside
+    // Create array alternating Fives (vertical) and 11-aside (horizontal)
     for (let i = 1; i <= Math.max(fivesCount, asideCount); i++) {
-      // Add Fives photo if available
+      // Add Fives photo (VERTICAL)
       if (i <= fivesCount) {
         allPhotos.push({
           src: `webphotos/Fives/Fives Photo ${i}.webp`,
           alt: 'Fives football photography',
-          index: photoIndex++
+          index: photoIndex++,
+          orientation: 'vertical'
         });
       }
       
-      // Add 11-aside photo if available
+      // Add 11-aside photo (HORIZONTAL)
       if (i <= asideCount) {
         allPhotos.push({
           src: `webphotos/11aside/11-a-side photo ${i}.webp`,
           alt: '11-a-side football photography',
-          index: photoIndex++
+          index: photoIndex++,
+          orientation: 'horizontal'
         });
       }
     }
@@ -367,7 +399,7 @@
     // Generate HTML for all photos
     allPhotos.forEach(photo => {
       const photoItem = document.createElement('div');
-      photoItem.className = 'photo-item';
+      photoItem.className = `photo-item ${photo.orientation}`;
       photoItem.setAttribute('data-index', photo.index);
       photoItem.onclick = function() { openLightbox(this); };
       
@@ -395,7 +427,10 @@
     
     function closeLightbox(event) {
       if (event) event.stopPropagation();
-      if (event && !event.target.classList.contains('lightbox') && !event.target.classList.contains('lightbox-close')) {
+      const target = event.target;
+      if (!target.classList.contains('lightbox') && 
+          !target.classList.contains('lightbox-close') &&
+          !target.closest('.lightbox-close')) {
         return;
       }
       document.getElementById('lightbox').classList.remove('active');
@@ -424,7 +459,10 @@
       const lightbox = document.getElementById('lightbox');
       if (!lightbox.classList.contains('active')) return;
       
-      if (e.key === 'Escape') closeLightbox(e);
+      if (e.key === 'Escape') {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
       if (e.key === 'ArrowRight') nextImage(e);
       if (e.key === 'ArrowLeft') previousImage(e);
     });
