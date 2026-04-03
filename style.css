@@ -1105,3 +1105,25 @@ a {
     transform: none !important;
   }
 }
+/* ===== CAL.COM BOOK BUTTON ===== */
+.cal-book-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  transition: var(--transition);
+}
+
+.cal-book-btn:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(60, 179, 113, 0.3);
+}
