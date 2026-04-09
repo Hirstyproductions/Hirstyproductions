@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Photography Portfolio | Hirsty Productions</title>
-  
+
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
@@ -16,6 +16,36 @@
       color: white;
     }
 
+    /* Filter Tabs */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+      background: var(--dark);
+    }
+
+    .filter-btn {
+      padding: 8px 24px;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: white;
+      color: var(--dark);
+    }
+
     /* Masonry Grid Setup */
     .masonry-container {
       padding: 40px 20px;
@@ -25,21 +55,25 @@
 
     .masonry-grid {
       column-count: 3;
-      column-gap: 20px;
+      column-gap: 16px;
     }
 
     .masonry-item {
       break-inside: avoid;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       background: #eee;
       border-radius: var(--border-radius);
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
     .masonry-item:hover {
       transform: scale(1.02);
+    }
+
+    .masonry-item.hidden {
+      display: none;
     }
 
     .masonry-item img {
@@ -56,7 +90,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.92);
       z-index: 2000;
       justify-content: center;
       align-items: center;
@@ -66,8 +100,9 @@
 
     .lightbox img {
       max-width: 90%;
-      max-height: 80%;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      max-height: 85vh;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+      border-radius: 4px;
     }
 
     .close-lightbox {
@@ -77,7 +112,26 @@
       color: white;
       font-size: 40px;
       cursor: pointer;
+      line-height: 1;
     }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 48px;
+      cursor: pointer;
+      background: rgba(0,0,0,0.3);
+      padding: 10px 18px;
+      border-radius: 4px;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .lightbox-nav:hover { background: rgba(0,0,0,0.6); }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
 
     @media (max-width: 900px) { .masonry-grid { column-count: 2; } }
     @media (max-width: 600px) { .masonry-grid { column-count: 1; } }
@@ -97,34 +151,219 @@
 
   <header class="portfolio-header">
     <h1>Photography</h1>
-    <p>Industrial, Sports, and Event Captures</p>
+    <p>Sports &amp; Event Captures</p>
   </header>
 
-  <div class="masonry-container">
-    <div class="masonry-grid">
-      <div class="masonry-item" onclick="openLightbox(this)">
-        <img src="assets/img/webphotos/photo1.webp" alt="Work 1">
-      </div>
-      <div class="masonry-item" onclick="openLightbox(this)">
-        <img src="assets/img/webphotos/photo2.webp" alt="Work 2">
-      </div>
-      <div class="masonry-item" onclick="openLightbox(this)">
-        <img src="assets/img/webphotos/photo3.webp" alt="Work 3">
-      </div>
-      </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all" onclick="filterPhotos('all', this)">All</button>
+    <button class="filter-btn" data-filter="11aside" onclick="filterPhotos('11aside', this)">11-a-Side</button>
+    <button class="filter-btn" data-filter="fives" onclick="filterPhotos('fives', this)">Fives</button>
+    <button class="filter-btn" data-filter="seven7seven" onclick="filterPhotos('seven7seven', this)">Seven7Seven</button>
   </div>
 
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <div class="masonry-container">
+    <div class="masonry-grid" id="grid">
+
+      <!-- 11-a-Side Photos -->
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%201.webp" alt="11-a-Side Photo 1" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%202.webp" alt="11-a-Side Photo 2" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%203.webp" alt="11-a-Side Photo 3" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%204.webp" alt="11-a-Side Photo 4" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%205.webp" alt="11-a-Side Photo 5" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%206.webp" alt="11-a-Side Photo 6" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%207.webp" alt="11-a-Side Photo 7" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%208.webp" alt="11-a-Side Photo 8" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%209.webp" alt="11-a-Side Photo 9" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2010.webp" alt="11-a-Side Photo 10" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2011.webp" alt="11-a-Side Photo 11" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2012.webp" alt="11-a-Side Photo 12" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2013.webp" alt="11-a-Side Photo 13" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2014.webp" alt="11-a-Side Photo 14" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2015.webp" alt="11-a-Side Photo 15" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2016.webp" alt="11-a-Side Photo 16" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2017.webp" alt="11-a-Side Photo 17" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2018.webp" alt="11-a-Side Photo 18" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2019.webp" alt="11-a-Side Photo 19" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2020.webp" alt="11-a-Side Photo 20" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2021.webp" alt="11-a-Side Photo 21" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2022.webp" alt="11-a-Side Photo 22" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2023.webp" alt="11-a-Side Photo 23" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2024.webp" alt="11-a-Side Photo 24" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2025.webp" alt="11-a-Side Photo 25" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2026.webp" alt="11-a-Side Photo 26" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2027.webp" alt="11-a-Side Photo 27" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2028.webp" alt="11-a-Side Photo 28" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2029.webp" alt="11-a-Side Photo 29" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2030.webp" alt="11-a-Side Photo 30" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2031.webp" alt="11-a-Side Photo 31" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2032.webp" alt="11-a-Side Photo 32" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2033.webp" alt="11-a-Side Photo 33" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2034.webp" alt="11-a-Side Photo 34" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2035.webp" alt="11-a-Side Photo 35" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2036.webp" alt="11-a-Side Photo 36" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2037.webp" alt="11-a-Side Photo 37" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2038.webp" alt="11-a-Side Photo 38" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2039.webp" alt="11-a-Side Photo 39" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2040.webp" alt="11-a-Side Photo 40" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2041.webp" alt="11-a-Side Photo 41" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2042.webp" alt="11-a-Side Photo 42" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2043.webp" alt="11-a-Side Photo 43" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2044.webp" alt="11-a-Side Photo 44" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2045.webp" alt="11-a-Side Photo 45" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2046.webp" alt="11-a-Side Photo 46" loading="lazy"></div>
+      <div class="masonry-item" data-category="11aside" onclick="openLightbox(this)"><img src="assets/img/webphotos/11aside/11-a-side%20photo%2047.webp" alt="11-a-Side Photo 47" loading="lazy"></div>
+
+      <!-- Fives Photos -->
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%201.webp" alt="Fives Photo 1" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%202.webp" alt="Fives Photo 2" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%203.webp" alt="Fives Photo 3" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%204.webp" alt="Fives Photo 4" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%205.webp" alt="Fives Photo 5" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%206.webp" alt="Fives Photo 6" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%207.webp" alt="Fives Photo 7" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%208.webp" alt="Fives Photo 8" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%209.webp" alt="Fives Photo 9" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2010.webp" alt="Fives Photo 10" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2011.webp" alt="Fives Photo 11" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2012.webp" alt="Fives Photo 12" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2013.webp" alt="Fives Photo 13" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2014.webp" alt="Fives Photo 14" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2015.webp" alt="Fives Photo 15" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2016.webp" alt="Fives Photo 16" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2017.webp" alt="Fives Photo 17" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2018.webp" alt="Fives Photo 18" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2019.webp" alt="Fives Photo 19" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2020.webp" alt="Fives Photo 20" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2021.webp" alt="Fives Photo 21" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2022.webp" alt="Fives Photo 22" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2023.webp" alt="Fives Photo 23" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2024.webp" alt="Fives Photo 24" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2025.webp" alt="Fives Photo 25" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2026.webp" alt="Fives Photo 26" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2027.webp" alt="Fives Photo 27" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2028.webp" alt="Fives Photo 28" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2029.webp" alt="Fives Photo 29" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2030.webp" alt="Fives Photo 30" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2031.webp" alt="Fives Photo 31" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2032.webp" alt="Fives Photo 32" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2033.webp" alt="Fives Photo 33" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2034.webp" alt="Fives Photo 34" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2035.webp" alt="Fives Photo 35" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2036.webp" alt="Fives Photo 36" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2037.webp" alt="Fives Photo 37" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2038.webp" alt="Fives Photo 38" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2039.webp" alt="Fives Photo 39" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2040.webp" alt="Fives Photo 40" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2041.webp" alt="Fives Photo 41" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2042.webp" alt="Fives Photo 42" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2043.webp" alt="Fives Photo 43" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2044.webp" alt="Fives Photo 44" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2045.webp" alt="Fives Photo 45" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2046.webp" alt="Fives Photo 46" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2047.webp" alt="Fives Photo 47" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2048.webp" alt="Fives Photo 48" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2049.webp" alt="Fives Photo 49" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2050.webp" alt="Fives Photo 50" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2051.webp" alt="Fives Photo 51" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2052.webp" alt="Fives Photo 52" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2053.webp" alt="Fives Photo 53" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2054.webp" alt="Fives Photo 54" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2055.webp" alt="Fives Photo 55" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2056.webp" alt="Fives Photo 56" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2057.webp" alt="Fives Photo 57" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2058.webp" alt="Fives Photo 58" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2059.webp" alt="Fives Photo 59" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2060.webp" alt="Fives Photo 60" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2061.webp" alt="Fives Photo 61" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2062.webp" alt="Fives Photo 62" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2063.webp" alt="Fives Photo 63" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2064.webp" alt="Fives Photo 64" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2065.webp" alt="Fives Photo 65" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2066.webp" alt="Fives Photo 66" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2067.webp" alt="Fives Photo 67" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2068.webp" alt="Fives Photo 68" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2069.webp" alt="Fives Photo 69" loading="lazy"></div>
+      <div class="masonry-item" data-category="fives" onclick="openLightbox(this)"><img src="assets/img/webphotos/Fives/Fives%20Photo%2070.webp" alt="Fives Photo 70" loading="lazy"></div>
+
+      <!-- Seven7Seven Photos -->
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%201.webp" alt="Seven7Seven Photo 1" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%202.webp" alt="Seven7Seven Photo 2" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%203.webp" alt="Seven7Seven Photo 3" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%204.webp" alt="Seven7Seven Photo 4" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%205.webp" alt="Seven7Seven Photo 5" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%206.webp" alt="Seven7Seven Photo 6" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%207.webp" alt="Seven7Seven Photo 7" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%208.webp" alt="Seven7Seven Photo 8" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%209.webp" alt="Seven7Seven Photo 9" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2010.webp" alt="Seven7Seven Photo 10" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2011.webp" alt="Seven7Seven Photo 11" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2012.webp" alt="Seven7Seven Photo 12" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2013.webp" alt="Seven7Seven Photo 13" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2014.webp" alt="Seven7Seven Photo 14" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2015.webp" alt="Seven7Seven Photo 15" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2016.webp" alt="Seven7Seven Photo 16" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2017.webp" alt="Seven7Seven Photo 17" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2018.webp" alt="Seven7Seven Photo 18" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2019.webp" alt="Seven7Seven Photo 19" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2020.webp" alt="Seven7Seven Photo 20" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2021.webp" alt="Seven7Seven Photo 21" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2022.webp" alt="Seven7Seven Photo 22" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2023.webp" alt="Seven7Seven Photo 23" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2024.webp" alt="Seven7Seven Photo 24" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2025.webp" alt="Seven7Seven Photo 25" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2026.webp" alt="Seven7Seven Photo 26" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2027.webp" alt="Seven7Seven Photo 27" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2028.webp" alt="Seven7Seven Photo 28" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2029.webp" alt="Seven7Seven Photo 29" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2030.webp" alt="Seven7Seven Photo 30" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2031.webp" alt="Seven7Seven Photo 31" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2032.webp" alt="Seven7Seven Photo 32" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2033.webp" alt="Seven7Seven Photo 33" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2034.webp" alt="Seven7Seven Photo 34" loading="lazy"></div>
+      <div class="masonry-item" data-category="seven7seven" onclick="openLightbox(this)"><img src="assets/img/webphotos/Seven7Seven/777%2035.webp" alt="Seven7Seven Photo 35" loading="lazy"></div>
+
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="handleLightboxClick(event)">
     <span class="close-lightbox">&times;</span>
+    <span class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1, event)">&#8249;</span>
     <img id="lightbox-img" src="" alt="Enlarged view">
+    <span class="lightbox-nav lightbox-next" onclick="navigateLightbox(1, event)">&#8250;</span>
   </div>
 
   <script>
+    let currentIndex = 0;
+    let visibleItems = [];
+
+    function getVisibleItems() {
+      return Array.from(document.querySelectorAll('.masonry-item:not(.hidden)'));
+    }
+
     function openLightbox(element) {
-      const src = element.querySelector('img').src;
-      document.getElementById('lightbox-img').src = src;
+      visibleItems = getVisibleItems();
+      currentIndex = visibleItems.indexOf(element);
+      showImage(currentIndex);
       document.getElementById('lightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
+    }
+
+    function showImage(index) {
+      const src = visibleItems[index].querySelector('img').src;
+      document.getElementById('lightbox-img').src = src;
+    }
+
+    function navigateLightbox(direction, event) {
+      event.stopPropagation();
+      currentIndex = (currentIndex + direction + visibleItems.length) % visibleItems.length;
+      showImage(currentIndex);
+    }
+
+    function handleLightboxClick(event) {
+      if (event.target === document.getElementById('lightbox') || event.target.classList.contains('close-lightbox')) {
+        closeLightbox();
+      }
     }
 
     function closeLightbox() {
@@ -132,9 +371,25 @@
       document.body.style.overflow = 'auto';
     }
 
-    // Close on Esc key
+    function filterPhotos(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.masonry-item').forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
     document.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('active')) return;
       if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleItems.length; showImage(currentIndex); }
+      if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length; showImage(currentIndex); }
     });
   </script>
 </body>
