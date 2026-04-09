@@ -1,1 +1,1 @@
-Videography and Photgraphy buiness
+Videography and Photography business
