@@ -8,7 +8,6 @@ if (mobileMenuToggle) {
     navLinks.classList.toggle('active');
   });
 
-  // Close mobile menu when clicking on a link
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenuToggle.classList.remove('active');
@@ -16,7 +15,6 @@ if (mobileMenuToggle) {
     });
   });
 
-  // Close mobile menu when clicking outside
   document.addEventListener('click', (e) => {
     if (!mobileMenuToggle.contains(e.target) && !navLinks.contains(e.target)) {
       mobileMenuToggle.classList.remove('active');
@@ -34,69 +32,80 @@ window.addEventListener('scroll', () => {
   } else {
     navbar.classList.remove('scrolled');
   }
-});
+}, { passive: true });
 
 // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
-    
-    // Don't prevent default for just "#" links
     if (href === '#') return;
-    
     e.preventDefault();
     const target = document.querySelector(href);
-    
     if (target) {
-      const offsetTop = target.offsetTop - 80; // Account for fixed navbar
-      
       window.scrollTo({
-        top: offsetTop,
+        top: target.offsetTop - 80,
         behavior: 'smooth'
       });
     }
   });
 });
 
-// ===== INTERSECTION OBSERVER FOR FADE-IN ANIMATIONS =====
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -100px 0px'
-};
-
-const fadeInElements = document.querySelectorAll('.service-card, .video-item, .client-logo, .photo-item');
-
-const observer = new IntersectionObserver((entries) => {
+// ===== INTERSECTION OBSERVER - FADE IN ANIMATIONS =====
+// Handles both service cards / video items AND masonry photo items
+const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.style.opacity = '0';
-      entry.target.style.transform = 'translateY(20px)';
-      
+      // Stagger masonry items slightly based on position
+      const delay = entry.target.classList.contains('masonry-item') ? 0 : 0;
       setTimeout(() => {
-        entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }, 100);
-      
-      observer.unobserve(entry.target);
+        entry.target.classList.add('visible');
+        entry.target.style.opacity = '';
+        entry.target.style.transform = '';
+      }, delay);
+      fadeObserver.unobserve(entry.target);
     }
   });
-}, observerOptions);
+}, {
+  threshold: 0.08,
+  rootMargin: '0px 0px -60px 0px'
+});
 
-fadeInElements.forEach(el => observer.observe(el));
+// Observe masonry items (photo portfolio page)
+function observeMasonryItems() {
+  document.querySelectorAll('.fade-in-item').forEach((el, i) => {
+    // Stagger in batches so columns animate nicely
+    el.style.transitionDelay = `${(i % 6) * 60}ms`;
+    fadeObserver.observe(el);
+  });
+}
+
+// Observe service/video cards (homepage)
+document.querySelectorAll('.service-card, .video-item, .client-logo').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  fadeObserver.observe(el);
+});
+
+// Run after DOM fully populated (photo grid builds via JS)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', observeMasonryItems);
+} else {
+  // DOM already ready — but masonry items may be appended by inline script
+  // Use a short defer to let the inline script finish
+  setTimeout(observeMasonryItems, 50);
+}
 
 // ===== ACTIVE NAV LINK HIGHLIGHTING =====
 const sections = document.querySelectorAll('section[id]');
 const navLinksAll = document.querySelectorAll('.nav-link');
 
 function highlightNav() {
-  let scrollPosition = window.scrollY + 200;
-  
+  const scrollPosition = window.scrollY + 200;
   sections.forEach(section => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
     const sectionId = section.getAttribute('id');
-    
     if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
       navLinksAll.forEach(link => {
         link.classList.remove('active');
@@ -108,20 +117,17 @@ function highlightNav() {
   });
 }
 
-window.addEventListener('scroll', highlightNav);
+window.addEventListener('scroll', debounce(highlightNav, 50), { passive: true });
 
 // ===== FORM SUBMISSION FEEDBACK =====
 const contactForm = document.querySelector('.contact-form');
 
 if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
+  contactForm.addEventListener('submit', function () {
     const button = this.querySelector('.btn-submit');
     const originalText = button.textContent;
-    
     button.textContent = 'Sending...';
     button.disabled = true;
-    
-    // Re-enable after 3 seconds (FormSpree will handle the actual submission)
     setTimeout(() => {
       button.textContent = originalText;
       button.disabled = false;
@@ -129,47 +135,34 @@ if (contactForm) {
   });
 }
 
-// ===== LAZY LOADING FOR IMAGES =====
-if ('loading' in HTMLImageElement.prototype) {
-  const images = document.querySelectorAll('img[loading="lazy"]');
-  images.forEach(img => {
-    img.src = img.dataset.src || img.src;
-  });
-} else {
-  // Fallback for browsers that don't support lazy loading
-  const script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-  document.body.appendChild(script);
+// ===== HERO SLIDESHOW (index.html) =====
+const heroSlides = document.querySelectorAll('.hero-slide');
+if (heroSlides.length > 0) {
+  let currentSlide = 0;
+  setInterval(() => {
+    heroSlides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % heroSlides.length;
+    heroSlides[currentSlide].classList.add('active');
+  }, 4000);
 }
 
-// ===== PREVENT SCROLL JUMP ON PAGE LOAD =====
+// ===== HASH SCROLL ON LOAD =====
 window.addEventListener('load', () => {
   if (window.location.hash) {
     setTimeout(() => {
       const target = document.querySelector(window.location.hash);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   }
 });
 
-// ===== PERFORMANCE: DEBOUNCE SCROLL EVENTS =====
+// ===== UTILITY: DEBOUNCE =====
 function debounce(func, wait) {
   let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
+  return function (...args) {
     clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
+    timeout = setTimeout(() => func.apply(this, args), wait);
   };
 }
-
-// Apply debounce to scroll-heavy functions
-window.addEventListener('scroll', debounce(() => {
-  highlightNav();
-}, 50));
 
 console.log('🎬 Hirsty Productions - Website Loaded Successfully!');

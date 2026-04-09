@@ -110,6 +110,101 @@
   
   <link rel="stylesheet" href="assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Hero Slideshow Styles */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    /* Horizontal photos - full screen */
+    .hero-slide.horizontal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+    
+    /* Vertical photos - centered with blur effect */
+    .hero-slide.vertical {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+    
+    .hero-slide.vertical::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: inherit;
+      background-size: cover;
+      background-position: center;
+      filter: blur(20px);
+      transform: scale(1.1);
+      z-index: 1;
+    }
+    
+    .hero-slide.vertical::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: inherit;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
+    }
+    
+    .hero-slide.active {
+      opacity: 1;
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 3;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 4;
+    }
+    
+    /* Ensure text stays readable on all backgrounds */
+    .hero-text {
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -132,8 +227,23 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Photo Slideshow -->
   <header class="hero">
+    <!-- Photo Slideshow Background -->
+    <div class="hero-slideshow">
+      <div class="hero-slide horizontal active" style="background-image: url('webphotos/hero/hero1.webp');"></div>
+      <div class="hero-slide vertical" style="background-image: url('webphotos/hero/hero2.webp');"></div>
+      <div class="hero-slide horizontal" style="background-image: url('webphotos/hero/hero3.webp');"></div>
+      <div class="hero-slide vertical" style="background-image: url('webphotos/hero/hero4.webp');"></div>
+      <div class="hero-slide horizontal" style="background-image: url('webphotos/hero/hero5.webp');"></div>
+      <div class="hero-slide vertical" style="background-image: url('webphotos/hero/hero6.webp');"></div>
+      <div class="hero-slide horizontal" style="background-image: url('webphotos/hero/hero7.webp');"></div>
+    </div>
+    
+    <!-- Dark Overlay for Text Readability -->
+    <div class="hero-overlay"></div>
+    
+    <!-- Content on Top -->
     <div class="hero-content">
       <div class="hero-text">
         <h1 class="hero-title">
@@ -250,13 +360,21 @@
         <h2 class="section-title">Trusted By</h2>
         <div class="client-logos">
           <a href="https://www.football5s.com/" target="_blank" rel="noopener" class="client-logo">
-            <img src="https://www.football5s.com/wp-content/uploads/2021/10/VMWS23DQ.png" alt="Fives">
+            <img src="https://www.football5s.com/wp-content/uploads/2021/10/VMWS23DQ.png" alt="Fives" style="height: 80px;">
           </a>
           <a href="https://www.adi.tv/" target="_blank" rel="noopener" class="client-logo">
-            <img src="https://www.adi.tv/wp-content/uploads/2021/07/ADI-BRAND-GENERIC-GREY.png" alt="ADI TV">
+            <img src="https://www.adi.tv/wp-content/uploads/2021/07/ADI-BRAND-GENERIC-GREY.png" alt="ADI TV" style="height: 80px;">
           </a>
           <a href="https://blackfriarsfc.co.uk/" target="_blank" rel="noopener" class="client-logo">
-            <img src="https://blackfriarsfc.co.uk/wp-content/uploads/2023/12/bfcwhite.png" alt="Blackfriars FC">
+            <img src="https://blackfriarsfc.co.uk/wp-content/uploads/2023/12/bfcwhite.png" alt="Blackfriars FC" style="height: 80px;">
+          </a>
+        </div>
+        <div class="client-logos" style="margin-top: 2rem;">
+          <a href="https://www.instagram.com/seven7sevenfc/" target="_blank" rel="noopener" class="client-logo">
+            <img src="777_logo.jpg" alt="Seven7Seven FC" style="height: 80px;">
+          </a>
+          <a href="https://gb.inxpress.com/locations/manchester-central/" target="_blank" rel="noopener" class="client-logo">
+            <img src="logo.png" alt="InXpress Manchester" style="height: 80px;">
           </a>
         </div>
       </div>
@@ -275,7 +393,7 @@
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                   <polyline points="22,6 12,13 2,6"/>
                 </svg>
-                <a href="/cdn-cgi/l/email-protection#7a171b0e0e54121308090e3a121308090e030a08151e0f190e1315140954191517"><span class="__cf_email__" data-cfemail="54393520207a3c3d262720143c3d2627202d24263b302137203d3b3a277a373b39">[email&#160;protected]</span></a>
+                <a href="mailto:Matt.hirst@hirstyproductions.com">Matt.hirst@hirstyproductions.com</a>
               </div>
             </div>
           </div>
@@ -338,6 +456,34 @@
     </div>
   </footer>
 
+<<<<<<< HEAD
   <script src="assets/js/script.js"></script>
+=======
+  <script src="script.js"></script>
+  
+  <script>
+    // Hero Photo Slideshow with mixed orientations
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.hero-slide');
+      let currentSlide = 0;
+      
+      function nextSlide() {
+        // Remove active class from current slide
+        slides[currentSlide].classList.remove('active');
+        
+        // Move to next slide
+        currentSlide = (currentSlide + 1) % slides.length;
+        
+        // Add active class to new slide
+        slides[currentSlide].classList.add('active');
+      }
+      
+      // Change slide every 4 seconds
+      setInterval(nextSlide, 4000);
+      
+      console.log('🎬 Hero slideshow initialized with', slides.length, 'photos (mixed orientations)');
+    });
+  </script>
+>>>>>>> b2343c816bd2f01877c75fa544419afbfc153727
 </body>
 </html>
