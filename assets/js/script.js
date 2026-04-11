@@ -165,4 +165,3 @@ function debounce(func, wait) {
   };
 }
 
-console.log('🎬 Hirsty Productions - Website Loaded Successfully!');

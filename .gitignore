@@ -1,1 +1,8 @@
 .claude/worktrees/stupefied-hofstadter/
+.env
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+node_modules/
