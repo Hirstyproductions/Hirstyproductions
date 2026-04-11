@@ -63,20 +63,18 @@
     }
 
     .featured-video {
-      max-width: 900px;
+      max-width: 400px;
       margin: 0 auto;
-      position: relative;
-      padding-bottom: 56.25%;
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
 
     .featured-video iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 400px;
+      height: 711px;
       border: none;
+      display: block;
     }
 
     .featured-label {
@@ -291,6 +289,8 @@
     @media (max-width: 768px) {
       .video-hero h1 { font-size: 2rem; }
       .video-grid { grid-template-columns: 1fr; }
+      .featured-video { max-width: 280px; }
+      .featured-video iframe { width: 280px; height: 498px; }
       .short-card { width: 160px; }
       .short-card iframe { width: 160px; height: 284px; }
       .shorts-grid { gap: 0.75rem; }
